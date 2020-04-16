@@ -3,7 +3,7 @@ import './App.css';
 import { withAuthenticator } from 'aws-amplify-react';
 import Navigation from './components/Navigation';
 import CourseDialog from './components/CourseDialog';
-import {courseMutation, listCourses, listCourseLocation} from './utils/api'
+import { courseMutation, listCourses } from './utils/api'
 
 class App extends Component {
   constructor(props) {
@@ -81,9 +81,6 @@ class App extends Component {
       dialogOpen: false
     });
   }
-
-
-
 
   render() {
     return (

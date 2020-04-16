@@ -3,7 +3,14 @@ import { Button, Dialog, DialogTitle, TextField, DialogContent, DialogActions } 
 import { TimePicker, DatePicker } from "@material-ui/pickers"
 import PropTypes from 'prop-types';
 import moment from 'moment'
-
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import FormLabel from '@material-ui/core/FormLabel';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 const CourseDialog = (props) => {
     const {
         handleDialogClose,
@@ -29,6 +36,12 @@ const CourseDialog = (props) => {
     const validation = (text) => {
         return text.length > 0 ? false : true;
     };
+
+const locations = ['OREILLY', 'BOOK', 'PLURALSIGHT'];
+
+const ratings = ['1', '2', '3', '4', '5'];
+
+const completedOptions = ['Yes', 'No'];
 
     return (
         <div>
@@ -102,6 +115,36 @@ const CourseDialog = (props) => {
                             value={moment(date || moment(), 'DD/MM/YYYY')}
                             onChange={(moment) => props.handleChange('date', 'DD/MM/YYYY')}
                         />
+                        <FormControl>
+                            <InputLabel>Course Location</InputLabel>
+                            <Select
+                            value={courseLocation || ''}
+                            onChange={(event) => props.handleChange('courseLocation', event.target.value)}
+                            >
+                                {locations.map(location => (
+                                    <MenuItem key={location} value={location}>{location}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                        <FormControl>
+                            <InputLabel>Course Location</InputLabel>
+                            <Select
+                            value={rating || ''}
+                            onChange={(event) => props.handleChange('rating', event.target.value)}
+                            >
+                                {ratings.map(rating => (
+                                    <MenuItem key={rating} value={rating}>{rating}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Course completed</FormLabel>
+                            <RadioGroup aria-label="gender" name="gender1" value={completed} onChange={(event) => props.handleChange('completed', event.target.value)}>
+                                {completedOptions.map(option => (
+                                    <FormControlLabel value={option} control={<Radio />} label={option} />
+                                ))}
+                            </RadioGroup>
+                        </FormControl>
                     </DialogContent>
                     <DialogActions>
                         <Button autoFocus onClick={handleDialogClose} color="primary">
