@@ -44,14 +44,3 @@ export const listCourses = /* GraphQL */ `
     }
   }
 `;
-
-export const listCourseLocations = /* GraphQL */ `
-  query ListCourseLocations {
-    __type(name: "courseLocation") {
-    name
-    enumValues {
-      name
-    }
-  }
-  }
-`;

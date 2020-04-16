@@ -16,11 +16,3 @@ export const listCourses = async () => {
     alert(JSON.stringify(allCourses));
     return allCourses;
 };
-
-export const listCourseLocation = async () => {
-    console.log('Listing courses');
-    const allCourseLocations = await API.graphql(graphqlOperation(queries.listCourseLocation));
-    console.log(allCourseLocations);    
-    alert(JSON.stringify(allCourseLocations));
-    return allCourseLocations;
-};

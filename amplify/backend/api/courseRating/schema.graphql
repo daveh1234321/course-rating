@@ -3,17 +3,17 @@ type Course @model {
   name: String!
   date: String
   description: String
-  rating: courseRatings
+  rating: Int
   comments: String
   courseLink: String
   codeLink: String
   creator: String
   length: String
   completed: Boolean
-  courseLocation: courseLocation
+  courseLocation: CourseLocation
 }
 
-enum courseLocation {
+enum CourseLocation {
   OREILLY,
   BOOK,
   PLURALSIGHT
