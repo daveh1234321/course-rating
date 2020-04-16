@@ -3,11 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import Amplify from 'aws-amplify';
+import awsconfig from './aws-exports';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers'
+import MomentUtils from '@date-io/moment';
+
+Amplify.configure(awsconfig);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+<MuiPickersUtilsProvider utils={MomentUtils}>
+  <App />
+  </MuiPickersUtilsProvider>,
   document.getElementById('root')
 );
 

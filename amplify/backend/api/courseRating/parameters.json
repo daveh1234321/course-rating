@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "courseRating",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authcourseratinga40bad9f",
+            "Outputs.UserPoolId"
+        ]
+    }
+}
