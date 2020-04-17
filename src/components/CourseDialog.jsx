@@ -48,9 +48,10 @@ const completedOptions = ['Yes', 'No'];
             <button onClick={handleDialogOpen}>Create Course</button>
             {dialogOpen && 
                 <Dialog onClose={handleDialogClose} open={dialogOpen}>
-                    <DialogTitle>Add a course</DialogTitle>
-                    <DialogContent>
+                    <DialogTitle style={{ padding: '3% 5% 3% 5%' }}>Add a course</DialogTitle>
+                    <DialogContent style={{ padding: '0% 5% 0% 5%', display: 'grid' }}>
                         <TextField
+                            style={{ margin: '2%' }}
                             error={validation(name)}
                             required
                             label='Title'
@@ -59,6 +60,7 @@ const completedOptions = ['Yes', 'No'];
                             onChange={(event) => props.handleChange('name',event.target.value)}
                         />
                         <TextField
+                            style={{ margin: '2%' }}
                             error={validation(description)}
                             required
                             label='Description'
@@ -67,6 +69,7 @@ const completedOptions = ['Yes', 'No'];
                             onChange={(event) => props.handleChange('description',event.target.value)}
                         />
                         <TextField
+                            style={{ margin: '2%' }}
                             error={validation(comments)}
                             required
                             label='Comments'
@@ -75,6 +78,7 @@ const completedOptions = ['Yes', 'No'];
                             onChange={(event) => props.handleChange('comments',event.target.value)}
                         />
                         <TextField
+                            style={{ margin: '2%' }}
                             error={validation(codeLink)}
                             required
                             label='Link to code'
@@ -83,6 +87,7 @@ const completedOptions = ['Yes', 'No'];
                             onChange={(event) => props.handleChange('codeLink',event.target.value)}
                         />
                         <TextField
+                            style={{ margin: '2%' }}
                             error={validation(courseLink)}
                             required
                             label='Link to course'
@@ -91,6 +96,7 @@ const completedOptions = ['Yes', 'No'];
                             onChange={(event) => props.handleChange('courseLink',event.target.value)}
                         />
                         <TextField
+                            style={{ margin: '2%' }}
                             error={validation(creator)}
                             required
                             label='Course creator'
@@ -99,23 +105,27 @@ const completedOptions = ['Yes', 'No'];
                             onChange={(event) => props.handleChange('creator',event.target.value)}
                         />
                         <TimePicker
+                            variant="outlined"
+                            style={{ margin: '2%' }}
                             error={moment(length) === '00:00'}
                             required
                             clearable
                             ampm={false}
                             label="Length"
+                            format='HH:mm'
                             value={moment(length || '00:00', 'HH:mm')}
-                            onChange={(moment) => props.handleChange('length',moment.format('HH:mm'))}
+                            onChange={(event) => props.handleChange('length',event.format('HH:mm'))}
                         />
                         <DatePicker
+                            style={{ margin: '2%' }}
                             disableToolbar
-                            variant="inline"
+                            variant="outlined"
                             label="Date"
                             format="DD/MM/YYYY"
                             value={moment(date || moment(), 'DD/MM/YYYY')}
-                            onChange={(moment) => props.handleChange('date', 'DD/MM/YYYY')}
+                            onChange={(moment) => props.handleChange('date', moment.format('DD/MM/YYYY'))}
                         />
-                        <FormControl>
+                        <FormControl variant="outlined" style={{ margin: '2%' }}>
                             <InputLabel>Course Location</InputLabel>
                             <Select
                             value={courseLocation || ''}
@@ -126,7 +136,7 @@ const completedOptions = ['Yes', 'No'];
                                 ))}
                             </Select>
                         </FormControl>
-                        <FormControl>
+                        <FormControl variant="outlined" style={{ margin: '2%' }}>
                             <InputLabel>Course Location</InputLabel>
                             <Select
                             value={rating || ''}
@@ -137,9 +147,9 @@ const completedOptions = ['Yes', 'No'];
                                 ))}
                             </Select>
                         </FormControl>
-                        <FormControl>
+                        <FormControl style={{ margin: '2%' }}>
                             <FormLabel>Course completed</FormLabel>
-                            <RadioGroup aria-label="gender" name="gender1" value={completed} onChange={(event) => props.handleChange('completed', event.target.value)}>
+                            <RadioGroup style={{ display: 'inline-block' }} value={completed} onChange={(event) => props.handleChange('completed', event.target.value)}>
                                 {completedOptions.map(option => (
                                     <FormControlLabel value={option} control={<Radio />} label={option} />
                                 ))}
@@ -179,7 +189,7 @@ CourseDialog.propTypes = {
         codeLink: PropTypes.string.isRequired,
         creator: PropTypes.string.isRequired,
         length: PropTypes.string.isRequired,
-        completed: PropTypes.bool.isRequired,
+        completed: PropTypes.string.isRequired,
         courseLocation: PropTypes.string
       }).isRequired
 }
