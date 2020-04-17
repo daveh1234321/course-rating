@@ -119,7 +119,7 @@ class App extends Component {
             handleChange={this.handleChange}
             handleSave={this.handleSave}
           />
-          <CoursesTable courses={this.state.courses}/>
+          <CoursesTable data={this.state.courses}/>
         </div>
       </Router>
     );

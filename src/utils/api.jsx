@@ -13,3 +13,9 @@ export const listCourses = async () => {
     const allCourses = await API.graphql(graphqlOperation(queries.listCourses));
     return allCourses.data.listCourses.items;
 };
+
+export const getCourseById = async () => {
+    const course = await API.graphql(graphqlOperation(queries.getCourse));
+    console.log(course);
+    return course.data
+}

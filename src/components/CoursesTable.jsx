@@ -39,8 +39,7 @@ export function CoursesTable (props) {
         []
       )
 
-    const { courses } = props;
-    const data = courses;
+    const { data } = props;
   // Use the state and functions returned from useTable to build your UI
   const { getTableProps, headerGroups, rows, prepareRow } = useTable({
     columns,
@@ -82,5 +81,5 @@ export function CoursesTable (props) {
 }
 
 CoursesTable.prototypes = {
-    courses: PropTypes.arrayOf().isRequired
+    data: PropTypes.arrayOf().isRequired
 }
