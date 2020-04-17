@@ -9,7 +9,7 @@ type Course @model {
   codeLink: String
   creator: String
   length: String
-  completed: Boolean
+  completed: String
   courseLocation: CourseLocation
 }
 
