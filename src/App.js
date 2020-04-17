@@ -10,6 +10,7 @@ import {
   Route,
   Link
 } from 'react-router-dom'
+import { CoursesTable } from './components/CoursesTable';
 
 class App extends Component {
   constructor(props) {
@@ -110,7 +111,6 @@ class App extends Component {
       <Router>
         <div className="App">
           <Navigation />
-          <button onClick={api.listCourses}>GraphQL Query</button>
           <CourseDialog 
             handleDialogClose={this.handleDialogClose}
             handleDialogOpen={this.handleDialogOpen}
@@ -119,6 +119,7 @@ class App extends Component {
             handleChange={this.handleChange}
             handleSave={this.handleSave}
           />
+          <CoursesTable courses={this.state.courses}/>
         </div>
       </Router>
     );
