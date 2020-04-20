@@ -11,13 +11,19 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import Typography from '@material-ui/core/Typography';
+
 const CourseDialog = (props) => {
     const {
         handleDialogClose,
         handleDialogOpen,
         handleSave,
         dialogOpen,
-        course
+        course,
+        edit,
+        handleDelete
     } = props;
     const {
         name,
@@ -48,7 +54,21 @@ const completedOptions = ['Yes', 'No'];
             <button onClick={handleDialogOpen}>Create Course</button>
             {dialogOpen && 
                 <Dialog onClose={handleDialogClose} open={dialogOpen}>
-                    <DialogTitle style={{ padding: '3% 5% 3% 5%' }}>Add a course</DialogTitle>
+                    <DialogTitle onClose={handleDialogClose} style={{ padding: '3% 5% 3% 5%' }}>
+                    <Typography>{edit ? 'Update Course' : 'Add Course'}</Typography>
+                            <IconButton onClick={handleDialogClose}>
+                                <CloseIcon />
+                            </IconButton>
+                    </DialogTitle>
+                    
+                    {/* <MuiDialogTitle style={{ padding: '3% 5% 3% 5%' }} disableTypography>
+                        <Typography variant="h6">Add a Course</Typography>
+                            <IconButtonon Click={handleDialogClose}>
+                                <CloseIcon />
+                            </IconButton>
+                    </MuiDialogTitle> */}
+                    
+                    
                     <DialogContent style={{ padding: '0% 5% 0% 5%', display: 'grid' }}>
                         <TextField
                             style={{ margin: '2%' }}
@@ -107,7 +127,7 @@ const completedOptions = ['Yes', 'No'];
                         <TimePicker
                             variant="outlined"
                             style={{ margin: '2%' }}
-                            error={moment(length) === '00:00'}
+                            error={moment(length) === ('' || '00:00')}
                             required
                             clearable
                             ampm={false}
@@ -122,6 +142,7 @@ const completedOptions = ['Yes', 'No'];
                             variant="outlined"
                             label="Date"
                             format="DD/MM/YYYY"
+                            error={moment(date) === ('')}
                             value={moment(date || moment(), 'DD/MM/YYYY')}
                             onChange={(moment) => props.handleChange('date', moment.format('DD/MM/YYYY'))}
                         />
@@ -151,17 +172,20 @@ const completedOptions = ['Yes', 'No'];
                             <FormLabel>Course completed</FormLabel>
                             <RadioGroup style={{ display: 'inline-block' }} value={completed} onChange={(event) => props.handleChange('completed', event.target.value)}>
                                 {completedOptions.map(option => (
-                                    <FormControlLabel value={option} control={<Radio />} label={option} />
+                                    <FormControlLabel key ={option} value={option} control={<Radio />} label={option} />
                                 ))}
                             </RadioGroup>
                         </FormControl>
                     </DialogContent>
                     <DialogActions>
-                        <Button autoFocus onClick={handleDialogClose} color="primary">
-                            Cancel
-                        </Button>
+                        {edit ? 
+                            <Button onClick={handleDelete} color="primary">
+                            Delete
+                        </Button> :
+                        null
+                        }
                         <Button onClick={handleSave} color="primary">
-                            Save
+                            {edit ? 'Update' : 'Save'}
                         </Button>
                     </DialogActions>
                 </Dialog>
@@ -191,5 +215,7 @@ CourseDialog.propTypes = {
         length: PropTypes.string.isRequired,
         completed: PropTypes.string.isRequired,
         courseLocation: PropTypes.string
-      }).isRequired
+      }).isRequired,
+    edit: PropTypes.bool.isRequired,
+    handleDelete: PropTypes.func.isRequired
 }
