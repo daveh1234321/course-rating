@@ -52,16 +52,29 @@ class App extends Component {
     this.getCourses();
   }
 
+  getCourseById = async (id) => {
+    console.log(id)
+    let course = await api.getCourseById(id);
+    console.log(course);
+    this.setState({
+      courseCopy: course,
+      edit: true
+    }, () => this.handleDialogOpen())
+  };
+
+  // subscribeCourses = async () => {
+  //   await api.onCreate();
+  // }
+
   getCourses = async () => {
     let courses = await api.listCourses();
-    console.log(courses);
     this.setState({
       courses
     })
   }
 
   handleChange = async (property, value) =>  {
-    let courseCopy = Object.assign({}, (this.state.edit ? this.state.course : this.state.courseCopy));
+    let courseCopy = Object.assign({}, (this.state.courseCopy));
     courseCopy[property] = value;
 
     this.setState( {courseCopy});
@@ -72,11 +85,14 @@ class App extends Component {
       course: this.state.courseCopy
     },
     () => {
-      console.log(this.state.courseCopy)
-      console.log(this.state.course)
-      api.courseMutation(this.state.course)
-    }
-    );
+      this.state.edit ?
+       api.courseUpdate(this.state.course)
+        .then(this.getCourses())
+        .finally(this.handleDialogClose()):
+      api.courseCreate(this.state.course)
+        .then(this.getCourses())
+        .finally(this.handleDialogClose())
+    });
     this.setState({
       courseCopy: {
         name: '',
@@ -91,8 +107,30 @@ class App extends Component {
         completed: '',
         courseLocation: null
       }
-    })
+    });
   }
+
+  handleDelete = async () => {
+    api.deleteCourse({ id: this.state.courseCopy.id })
+      .then(this.getCourses())
+      .finally(this.handleDialogClose());
+    this.setState({
+      courseCopy: {
+        name: '',
+        date: '',
+        description: '',
+        rating: null,
+        comments: '',
+        courseLink: '',
+        codeLink: '',
+        creator: '',
+        length: '',
+        completed: '',
+        courseLocation: null
+      }
+    });
+  }
+
 
   handleDialogOpen = () => {
     this.setState({
@@ -102,7 +140,8 @@ class App extends Component {
 
   handleDialogClose = () => {
     this.setState({
-      dialogOpen: false
+      dialogOpen: false,
+      edit: false
     });
   }
 
@@ -115,11 +154,16 @@ class App extends Component {
             handleDialogClose={this.handleDialogClose}
             handleDialogOpen={this.handleDialogOpen}
             dialogOpen={this.state.dialogOpen}
-            course={this.state.edit ? this.state.course : this.state.courseCopy}
+            course={this.state.courseCopy}
             handleChange={this.handleChange}
             handleSave={this.handleSave}
+            edit={this.state.edit}
+            handleDelete={this.handleDelete}
           />
-          <CoursesTable data={this.state.courses}/>
+          <CoursesTable
+            data={this.state.courses}
+            getCourseById={this.getCourseById}
+          />
         </div>
       </Router>
     );

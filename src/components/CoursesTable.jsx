@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CssBaseline from '@material-ui/core/CssBaseline'
 import MaUTable from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
-
 import { useTable } from 'react-table'
-
 
 
 
@@ -64,7 +61,7 @@ export function CoursesTable (props) {
         {rows.map((row, i) => {
           prepareRow(row)
           return (
-            <TableRow {...row.getRowProps()}>
+            <TableRow {...row.getRowProps()} onClick={() => props.getCourseById(row.original.id)}>
               {row.cells.map(cell => {
                 return (
                   <TableCell {...cell.getCellProps()}>
@@ -81,5 +78,6 @@ export function CoursesTable (props) {
 }
 
 CoursesTable.prototypes = {
-    data: PropTypes.arrayOf().isRequired
+    data: PropTypes.arrayOf().isRequired,
+    getCourseById: PropTypes.func.isRequired
 }
