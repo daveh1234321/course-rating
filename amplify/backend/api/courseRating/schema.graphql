@@ -1,4 +1,4 @@
-type Course @model {
+type Course @model @auth(rules: [{ allow: owner }]){
   id: ID!
   name: String!
   date: String

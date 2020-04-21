@@ -16,6 +16,7 @@ export const getCourse = /* GraphQL */ `
       length
       completed
       courseLocation
+      owner
     }
   }
 `;
@@ -39,6 +40,7 @@ export const listCourses = /* GraphQL */ `
         length
         completed
         courseLocation
+        owner
       }
       nextToken
     }
