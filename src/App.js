@@ -11,6 +11,8 @@ import {
   Link
 } from 'react-router-dom'
 import { CoursesTable } from './components/CoursesTable';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 class App extends Component {
   constructor(props) {
@@ -53,9 +55,7 @@ class App extends Component {
   }
 
   getCourseById = async (id) => {
-    console.log(id)
     let course = await api.getCourseById(id);
-    console.log(course);
     this.setState({
       courseCopy: course,
       edit: true
@@ -150,6 +150,10 @@ class App extends Component {
       <Router>
         <div className="App">
           <Navigation />
+          <CoursesTable
+            data={this.state.courses}
+            getCourseById={this.getCourseById}
+          />
           <CourseDialog 
             handleDialogClose={this.handleDialogClose}
             handleDialogOpen={this.handleDialogOpen}
@@ -160,14 +164,22 @@ class App extends Component {
             edit={this.state.edit}
             handleDelete={this.handleDelete}
           />
-          <CoursesTable
-            data={this.state.courses}
-            getCourseById={this.getCourseById}
-          />
+          <Fab
+            color="primary"
+            onClick={this.handleDialogOpen}
+            style={{
+              position: 'absolute',
+              bottom: '2%'
+            }}
+          >
+            <AddIcon />
+          </Fab>
         </div>
       </Router>
     );
   }
 }
 
-export default withAuthenticator(App, true);
+export default withAuthenticator(App, {
+  includeGreetings: true
+});
