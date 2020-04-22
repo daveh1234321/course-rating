@@ -50,8 +50,8 @@ export function CoursesTable (props) {
         {headerGroups.map(headerGroup => (
           <TableRow {...headerGroup.getHeaderGroupProps()}>          
             {headerGroup.headers.map(column => (
-              <TableCell {...column.getHeaderProps()}>
-                {column.render('Header')}
+              <TableCell {...column.getHeaderProps()} style={{ border: 'none', fontSize: 'large', color: 'white'}}>
+                {column.render('Header').toUpperCase()}
               </TableCell>
             ))}
           </TableRow>
@@ -64,7 +64,7 @@ export function CoursesTable (props) {
             <TableRow {...row.getRowProps()} onClick={() => props.getCourseById(row.original.id)}>
               {row.cells.map(cell => {
                 return (
-                  <TableCell {...cell.getCellProps()}>
+                  <TableCell {...cell.getCellProps()} style={{ border: 'none', fontSize: 'medium', color: 'white' }}>
                     {cell.render('Cell')}
                   </TableCell>
                 )

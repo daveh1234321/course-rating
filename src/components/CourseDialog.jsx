@@ -51,15 +51,18 @@ const CourseDialog = (props) => {
   return (
     <div>
       {dialogOpen && 
-        <Dialog onClose={handleDialogClose} open={dialogOpen}>
+        <Dialog onClose={handleDialogClose} open={dialogOpen} maxWidth='lg'>
           <DialogTitle onClose={handleDialogClose} style={{ padding: '3% 5% 3% 5%' }}>
-            <Typography>{edit ? 'Update Course' : 'Add Course'}</Typography>
-            <IconButton onClick={handleDialogClose}>
-              <CloseIcon />
-            </IconButton>
+            <div style={{ display:'inline-flex', alignItems: 'center'}}>
+              <Typography>{edit ? 'Update Course' : 'Add Course'}</Typography>
+              <IconButton onClick={handleDialogClose}>
+                <CloseIcon />
+              </IconButton>
+            </div>
           </DialogTitle>                                
           <DialogContent style={{ padding: '0% 5% 0% 5%', display: 'grid' }}>
             <TextField
+              fullWidth
               style={{ margin: '2%' }}
               error={validation(name)}
               required
@@ -69,6 +72,7 @@ const CourseDialog = (props) => {
               onChange={(event) => props.handleChange('name',event.target.value)}
             />
             <TextField
+              fullWidth
               style={{ margin: '2%' }}
               error={validation(description)}
               required
@@ -78,6 +82,7 @@ const CourseDialog = (props) => {
               onChange={(event) => props.handleChange('description',event.target.value)}
             />
             <TextField
+              fullWidth
               style={{ margin: '2%' }}
               error={validation(comments)}
               required
@@ -87,6 +92,7 @@ const CourseDialog = (props) => {
               onChange={(event) => props.handleChange('comments',event.target.value)}
             />
             <TextField
+              fullWidth
               style={{ margin: '2%' }}
               error={validation(codeLink)}
               required
@@ -96,6 +102,7 @@ const CourseDialog = (props) => {
               onChange={(event) => props.handleChange('codeLink',event.target.value)}
             />
             <TextField
+              fullWidth
               style={{ margin: '2%' }}
               error={validation(courseLink)}
               required
@@ -105,6 +112,7 @@ const CourseDialog = (props) => {
               onChange={(event) => props.handleChange('courseLink',event.target.value)}
             />
             <TextField
+              fullWidth
               style={{ margin: '2%' }}
               error={validation(creator)}
               required
@@ -114,6 +122,7 @@ const CourseDialog = (props) => {
               onChange={(event) => props.handleChange('creator',event.target.value)}
             />
             <KeyboardTimePicker
+              fullWidth
               variant="outlined"
               style={{ margin: '2%' }}
               error={moment(length) === ('' || '00:00')}
@@ -126,6 +135,7 @@ const CourseDialog = (props) => {
               onChange={(event) => props.handleChange('length',event.format('HH:mm'))}
             />
             <DatePicker
+              fullWidth
               style={{ margin: '2%' }}
               disableToolbar
               variant="outlined"
@@ -135,7 +145,7 @@ const CourseDialog = (props) => {
               value={moment(date || moment(), 'DD/MM/YYYY')}
               onChange={(moment) => props.handleChange('date', moment.format('DD/MM/YYYY'))}
             />
-            <FormControl variant="outlined" style={{ margin: '2%' }}>
+            <FormControl fullWidth variant="outlined" style={{ margin: '2%' }}>
               <InputLabel>Course Location</InputLabel>
               <Select
                 value={courseLocation || ''}
@@ -146,7 +156,7 @@ const CourseDialog = (props) => {
                 ))}
               </Select>
             </FormControl>
-            <FormControl variant="outlined" style={{ margin: '2%' }}>
+            <FormControl fullWidth variant="outlined" style={{ margin: '2%' }}>
               <InputLabel>Course Location</InputLabel>
               <Select
                 value={rating || ''}
