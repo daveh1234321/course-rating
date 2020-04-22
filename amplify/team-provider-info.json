@@ -16,5 +16,23 @@
                 "courseratinga40bad9f": {}
             }
         }
+    },
+    "prod": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-course-rating-prod-141708-authRole",
+            "UnauthRoleArn": "arn:aws:iam::881762180240:role/amplify-course-rating-prod-141708-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::881762180240:role/amplify-course-rating-prod-141708-authRole",
+            "Region": "eu-west-2",
+            "DeploymentBucketName": "amplify-course-rating-prod-141708-deployment",
+            "UnauthRoleName": "amplify-course-rating-prod-141708-unauthRole",
+            "StackName": "amplify-course-rating-prod-141708",
+            "StackId": "arn:aws:cloudformation:eu-west-2:881762180240:stack/amplify-course-rating-prod-141708/68e2b440-83d2-11ea-989c-0617023ccf6e",
+            "AmplifyAppId": "d1j00wnb5z8mgr"
+        },
+        "categories": {
+            "auth": {
+                "courserating0b03a707": {}
+            }
+        }
     }
 }
