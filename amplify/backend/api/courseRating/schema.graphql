@@ -11,6 +11,7 @@ type Course @model @auth(rules: [{ allow: owner }]){
   length: String
   completed: String
   courseLocation: CourseLocation
+  owner: String
 }
 
 enum CourseLocation {
