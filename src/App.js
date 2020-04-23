@@ -7,6 +7,7 @@ import * as api from './utils/api';
 import { CoursesTable } from './components/CoursesTable';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import validation from './utils/util';
 
 class App extends Component {
   constructor(props) {
@@ -40,7 +41,8 @@ class App extends Component {
         length: '',
         completed: '',
         courseLocation: null
-      }
+      },
+      error: {}
     };
   };
 
@@ -75,54 +77,31 @@ class App extends Component {
   }
 
   handleSave = async () => {
-    this.setState({
-      course: this.state.courseCopy
-    },
-    () => {
-      this.state.edit ?
-       api.courseUpdate(this.state.course)
-        .then(this.getCourses())
-        .finally(this.handleDialogClose()):
-      api.courseCreate(this.state.course)
-        .then(this.getCourses())
-        .finally(this.handleDialogClose())
-    });
-    this.setState({
-      courseCopy: {
-        name: '',
-        date: '',
-        description: '',
-        rating: null,
-        comments: '',
-        courseLink: '',
-        codeLink: '',
-        creator: '',
-        length: '',
-        completed: '',
-        courseLocation: null
-      }
-    });
+    const error = validation(this.state.courseCopy)
+    if (Object.keys(error).length === 0) {
+      this.setState({
+        course: this.state.courseCopy
+      },
+      () => {
+        this.state.edit ?
+        api.courseUpdate(this.state.course)
+          .then(this.getCourses())
+          .finally(this.handleDialogClose()):
+        api.courseCreate(this.state.course)
+          .then(this.getCourses())
+          .finally(this.handleDialogClose())
+      });
+    } else {
+      this.setState({
+        error: error
+      })
+    }
   }
 
   handleDelete = async () => {
     api.deleteCourse({ id: this.state.courseCopy.id })
       .then(this.getCourses())
       .finally(this.handleDialogClose());
-    this.setState({
-      courseCopy: {
-        name: '',
-        date: '',
-        description: '',
-        rating: null,
-        comments: '',
-        courseLink: '',
-        codeLink: '',
-        creator: '',
-        length: '',
-        completed: '',
-        courseLocation: null
-      }
-    });
   }
 
 
@@ -133,9 +112,24 @@ class App extends Component {
   };
 
   handleDialogClose = () => {
+    console.log('Closed')
     this.setState({
       dialogOpen: false,
-      edit: false
+      edit: false,
+      courseCopy: {
+        name: '',
+        date: '',
+        description: '',
+        rating: null,
+        comments: '',
+        courseLink: '',
+        codeLink: '',
+        creator: '',
+        length: '',
+        completed: '',
+        courseLocation: null
+      },
+      error: {}
     });
   }
 
@@ -156,10 +150,11 @@ class App extends Component {
           handleSave={this.handleSave}
           edit={this.state.edit}
           handleDelete={this.handleDelete}
+          error={this.state.error}
         />
         <Fab
           onClick={this.handleDialogOpen}
-          color="primary"
+          color="secondary"
           style={{
             position: 'absolute',
             bottom: '2%',

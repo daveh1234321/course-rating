@@ -14,6 +14,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 const CourseDialog = (props) => {
   const {
@@ -22,7 +23,9 @@ const CourseDialog = (props) => {
     dialogOpen,
     course,
     edit,
-    handleDelete
+    handleDelete,
+    error
+    
   } = props;
   const {
     name,
@@ -38,10 +41,6 @@ const CourseDialog = (props) => {
     courseLocation
   } = course;
 
-  const validation = (text) => {
-    return text.length > 0 ? false : true;
-  };
-
   const locations = ['OREILLY', 'BOOK', 'PLURALSIGHT'];
 
   const ratings = ['1', '2', '3', '4', '5'];
@@ -51,7 +50,7 @@ const CourseDialog = (props) => {
   return (
     <div>
       {dialogOpen && 
-        <Dialog onClose={handleDialogClose} open={dialogOpen} maxWidth='sm' fullWidth='true'>
+        <Dialog onClose={handleDialogClose} open={dialogOpen} maxWidth='sm' fullWidth={true}>
           <DialogTitle onClose={handleDialogClose} style={{ padding: '3% 5% 3% 5%' }}>
             <div style={{ display:'inline-flex', alignItems: 'center'}}>
               <Typography>{edit ? 'Update Course' : 'Add Course'}</Typography>
@@ -64,60 +63,66 @@ const CourseDialog = (props) => {
             <TextField
               fullWidth
               style={{ margin: '1%' }}
-              error={validation(name)}
               required
               label='Title'
               variant='outlined'
+              error={error.hasOwnProperty('name')}
+              helperText={error['name']}
               value={name}
               onChange={(event) => props.handleChange('name',event.target.value)}
             />
             <TextField
               fullWidth
               style={{ margin: '1%' }}
-              error={validation(description)}
               required
               label='Description'
               variant='outlined'
+              error={error.hasOwnProperty('description')}
+              helperText={error['description']}
               value={description}
               onChange={(event) => props.handleChange('description',event.target.value)}
             />
             <TextField
               fullWidth
               style={{ margin: '1%' }}
-              error={validation(comments)}
               required
               label='Comments'
               variant='outlined'
+              error={error.hasOwnProperty('comments')}
+              helperText={error['comments']}
               value={comments}
               onChange={(event) => props.handleChange('comments',event.target.value)}
             />
             <TextField
               fullWidth
               style={{ margin: '1%' }}
-              error={validation(codeLink)}
               required
               label='Link to code'
               variant='outlined'
+              error={error.hasOwnProperty('codeLink')}
+              helperText={error['codeLink']}
               value={codeLink}
               onChange={(event) => props.handleChange('codeLink',event.target.value)}
             />
             <TextField
               fullWidth
               style={{ margin: '1%' }}
-              error={validation(courseLink)}
               required
               label='Link to course'
               variant='outlined'
+              error={error.hasOwnProperty('courseLink')}
+              helperText={error['courseLink']}
               value={courseLink}
               onChange={(event) => props.handleChange('courseLink',event.target.value)}
             />
             <TextField
               fullWidth
               style={{ margin: '1%' }}
-              error={validation(creator)}
               required
               label='Course creator'
               variant='outlined'
+              error={error.hasOwnProperty('creator')}
+              helperText={error['creator']}
               value={creator}
               onChange={(event) => props.handleChange('creator',event.target.value)}
             />
@@ -125,27 +130,38 @@ const CourseDialog = (props) => {
               fullWidth
               variant="outlined"
               style={{ margin: '1%' }}
-              error={moment(length) === ('' || '00:00')}
               required
               clearable
               ampm={false}
               label="Length"
-              format='HH:mm'
-              value={moment(length || '00:00', 'HH:mm')}
-              onChange={(event) => props.handleChange('length',event.format('HH:mm'))}
+              error={error.hasOwnProperty('length')}
+              helperText={error['length']}
+              value={moment(length || moment('00:00', 'HH:mm'), 'HH:mm')}
+              onChange={(time) => {
+                props.handleChange('length',moment(time).format('HH:mm'))
+              }}
             />
             <DatePicker
+              color="secondary"
               fullWidth
               style={{ margin: '1%' }}
               disableToolbar
               variant="outlined"
               label="Date"
-              format="DD/MM/YYYY"
-              error={moment(date) === ('')}
-              value={moment(date || moment(), 'DD/MM/YYYY')}
-              onChange={(moment) => props.handleChange('date', moment.format('DD/MM/YYYY'))}
+              error={error.hasOwnProperty('date')}
+              format='DD/MM/YYYY'
+              helperText={error['date']}
+              value={moment(date || moment().format('DD/MM/YYYY'), 'DD/MM/YYYY')}
+              onChange={(date) => {
+                props.handleChange('date', moment(date).format('DD/MM/YYYY'))
+              }}
             />
-            <FormControl fullWidth variant="outlined" style={{ margin: '1%' }}>
+            <FormControl
+              fullWidth
+              variant="outlined"
+              style={{ margin: '1%' }}
+              error={error.hasOwnProperty('courseLocation')}
+            >
               <InputLabel>Course Location</InputLabel>
               <Select
                 value={courseLocation || ''}
@@ -155,8 +171,13 @@ const CourseDialog = (props) => {
                     <MenuItem key={location} value={location}>{location}</MenuItem>
                 ))}
               </Select>
+                <FormHelperText>{error['courseLocation']}</FormHelperText>
             </FormControl>
-            <FormControl fullWidth variant="outlined" style={{ margin: '1%' }}>
+            <FormControl
+            fullWidth
+            variant="outlined"
+            style={{ margin: '1%' }}
+            error={error.hasOwnProperty('rating')}>
               <InputLabel>Course Location</InputLabel>
               <Select
                 value={rating || ''}
@@ -166,24 +187,54 @@ const CourseDialog = (props) => {
                     <MenuItem key={rating} value={rating}>{rating}</MenuItem>
                 ))}
               </Select>
+                <FormHelperText>{error['rating']}</FormHelperText>
             </FormControl>
-            <FormControl style={{ margin: '1%' }}>
+            <FormControl
+              style={{ margin: '1%' }}
+              error={error.hasOwnProperty('completed')}
+            >
               <FormLabel>Course completed</FormLabel>
                 <RadioGroup style={{ display: 'inline-block' }} value={completed} onChange={(event) => props.handleChange('completed', event.target.value)}>
                   {completedOptions.map(option => (
                       <FormControlLabel key ={option} value={option} control={<Radio />} label={option} />
                   ))}
                 </RadioGroup>
+                  <FormHelperText>{error['completed']}</FormHelperText>
             </FormControl>
           </DialogContent>
-          <DialogActions>
+          <DialogActions
+            style={{
+              paddingBottom: '3%',
+              paddingRight: '3%',
+              paddingLeft: '3%',
+              justifyContent: 'space-between'
+            }}
+          >
+            <Button
+                size="large"
+                variant="outlined"
+                onClick={handleDialogClose}
+                color="primary"
+              >
+                Cancel
+              </Button>
             {edit ? 
-              <Button onClick={handleDelete} color="primary">
+              <Button
+                size="large"
+                variant="outlined"
+                onClick={handleDelete}
+                color="primary"
+              >
                 Delete
               </Button> :
               null
             }
-            <Button onClick={handleSave} color="primary">
+            <Button
+              size="large"
+              variant="outlined"
+              onClick={handleSave}
+              color="primary"
+            >
               {edit ? 'Update' : 'Save'}
             </Button>
           </DialogActions>
@@ -215,5 +266,6 @@ CourseDialog.propTypes = {
     courseLocation: PropTypes.string
     }).isRequired,
   edit: PropTypes.bool.isRequired,
-  handleDelete: PropTypes.func.isRequired
+  handleDelete: PropTypes.func.isRequired,
+  error: PropTypes.shape({}).isRequired
 }

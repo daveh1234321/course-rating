@@ -51,7 +51,7 @@ const theme = useTheme();
         {headerGroups.map(headerGroup => (
           <TableRow {...headerGroup.getHeaderGroupProps()}>          
             {headerGroup.headers.map(column => (
-              <TableCell {...column.getHeaderProps()} style={{ border: 'none', fontSize: 'large', color: theme.palette.primary.main}}>
+              <TableCell {...column.getHeaderProps()} style={{ border: 'none', fontSize: 'large', color: theme.palette.secondary.main}}>
                 {column.render('Header').toUpperCase()}
               </TableCell>
             ))}
@@ -65,7 +65,7 @@ const theme = useTheme();
             <TableRow {...row.getRowProps()} onClick={() => props.getCourseById(row.original.id)}>
               {row.cells.map(cell => {
                 return (
-                  <TableCell {...cell.getCellProps()} style={{ border: 'none', fontSize: 'medium', color: theme.palette.primary.main }}>
+                  <TableCell {...cell.getCellProps()} style={{ border: 'none', fontSize: 'medium', color: theme.palette.secondary.main }}>
                     {cell.render('Cell')}
                   </TableCell>
                 )
