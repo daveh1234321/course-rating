@@ -4,12 +4,6 @@ import { withAuthenticator } from 'aws-amplify-react';
 import Navigation from './components/Navigation';
 import CourseDialog from './components/CourseDialog';
 import * as api from './utils/api';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom'
 import { CoursesTable } from './components/CoursesTable';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
@@ -147,35 +141,33 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <div className="App">
-          <Navigation />
-          <CoursesTable
-            data={this.state.courses}
-            getCourseById={this.getCourseById}
-          />
-          <CourseDialog 
-            handleDialogClose={this.handleDialogClose}
-            handleDialogOpen={this.handleDialogOpen}
-            dialogOpen={this.state.dialogOpen}
-            course={this.state.courseCopy}
-            handleChange={this.handleChange}
-            handleSave={this.handleSave}
-            edit={this.state.edit}
-            handleDelete={this.handleDelete}
-          />
-          <Fab
-            color="primary"
-            onClick={this.handleDialogOpen}
-            style={{
-              position: 'absolute',
-              bottom: '2%'
-            }}
-          >
-            <AddIcon />
-          </Fab>
-        </div>
-      </Router>
+      <div className="App">
+        <Navigation />
+        <CoursesTable
+          data={this.state.courses}
+          getCourseById={this.getCourseById}
+        />
+        <CourseDialog
+          handleDialogClose={this.handleDialogClose}
+          handleDialogOpen={this.handleDialogOpen}
+          dialogOpen={this.state.dialogOpen}
+          course={this.state.courseCopy}
+          handleChange={this.handleChange}
+          handleSave={this.handleSave}
+          edit={this.state.edit}
+          handleDelete={this.handleDelete}
+        />
+        <Fab
+          onClick={this.handleDialogOpen}
+          color="primary"
+          style={{
+            position: 'absolute',
+            bottom: '2%',
+          }}
+        >
+          <AddIcon />
+        </Fab>
+      </div>
     );
   }
 }

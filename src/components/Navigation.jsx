@@ -1,30 +1,16 @@
 import React from 'react';
-import { AppBar, Typography, IconButton, Toolbar } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import { Typography, Button } from '@material-ui/core';
 
 
 const Navigation = () => {
-    return (
-        <AppBar position="static">
-            <Toolbar>
-                <IconButton edge="start" color="inherit" aria-label="menu">
-                    <MenuIcon />
-                </IconButton>
-                <Typography variant="h6">
-                    Photos
-                </Typography>
-                <IconButton
-                    aria-label="account of current user"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    onClick={() => {}}
-                    color="inherit"
-                >
-                    <AccountCircle />
-                </IconButton>
-            </Toolbar>
-      </AppBar>
-    )
+  return (
+    <>
+      <nav style={{ display: 'inline-flex', alignItems: 'center', paddingTop: '1%' }}>
+        <Typography color="primary" style={{ fontSize: 'x-large', fontWeight: 600 }}>Course Ratings</Typography>
+        <Button color="primary" variant="outlined" style={{ right: '-158%' }}>Sign in</Button>
+      </nav>
+      <hr style={{ width: '95%' }} />
+    </>
+  )
 }
 export default Navigation;
