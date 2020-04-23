@@ -51,11 +51,11 @@ const CourseDialog = (props) => {
   return (
     <div>
       {dialogOpen && 
-        <Dialog onClose={handleDialogClose} open={dialogOpen} maxWidth='lg'>
+        <Dialog onClose={handleDialogClose} open={dialogOpen} maxWidth='sm' fullWidth='true'>
           <DialogTitle onClose={handleDialogClose} style={{ padding: '3% 5% 3% 5%' }}>
             <div style={{ display:'inline-flex', alignItems: 'center'}}>
               <Typography>{edit ? 'Update Course' : 'Add Course'}</Typography>
-              <IconButton onClick={handleDialogClose}>
+              <IconButton onClick={handleDialogClose} style={{ right: '-320%', paddingTop: '0%' }}>
                 <CloseIcon />
               </IconButton>
             </div>
@@ -63,7 +63,7 @@ const CourseDialog = (props) => {
           <DialogContent style={{ padding: '0% 5% 0% 5%', display: 'grid' }}>
             <TextField
               fullWidth
-              style={{ margin: '2%' }}
+              style={{ margin: '1%' }}
               error={validation(name)}
               required
               label='Title'
@@ -73,7 +73,7 @@ const CourseDialog = (props) => {
             />
             <TextField
               fullWidth
-              style={{ margin: '2%' }}
+              style={{ margin: '1%' }}
               error={validation(description)}
               required
               label='Description'
@@ -83,7 +83,7 @@ const CourseDialog = (props) => {
             />
             <TextField
               fullWidth
-              style={{ margin: '2%' }}
+              style={{ margin: '1%' }}
               error={validation(comments)}
               required
               label='Comments'
@@ -93,7 +93,7 @@ const CourseDialog = (props) => {
             />
             <TextField
               fullWidth
-              style={{ margin: '2%' }}
+              style={{ margin: '1%' }}
               error={validation(codeLink)}
               required
               label='Link to code'
@@ -103,7 +103,7 @@ const CourseDialog = (props) => {
             />
             <TextField
               fullWidth
-              style={{ margin: '2%' }}
+              style={{ margin: '1%' }}
               error={validation(courseLink)}
               required
               label='Link to course'
@@ -113,7 +113,7 @@ const CourseDialog = (props) => {
             />
             <TextField
               fullWidth
-              style={{ margin: '2%' }}
+              style={{ margin: '1%' }}
               error={validation(creator)}
               required
               label='Course creator'
@@ -124,7 +124,7 @@ const CourseDialog = (props) => {
             <KeyboardTimePicker
               fullWidth
               variant="outlined"
-              style={{ margin: '2%' }}
+              style={{ margin: '1%' }}
               error={moment(length) === ('' || '00:00')}
               required
               clearable
@@ -136,7 +136,7 @@ const CourseDialog = (props) => {
             />
             <DatePicker
               fullWidth
-              style={{ margin: '2%' }}
+              style={{ margin: '1%' }}
               disableToolbar
               variant="outlined"
               label="Date"
@@ -145,7 +145,7 @@ const CourseDialog = (props) => {
               value={moment(date || moment(), 'DD/MM/YYYY')}
               onChange={(moment) => props.handleChange('date', moment.format('DD/MM/YYYY'))}
             />
-            <FormControl fullWidth variant="outlined" style={{ margin: '2%' }}>
+            <FormControl fullWidth variant="outlined" style={{ margin: '1%' }}>
               <InputLabel>Course Location</InputLabel>
               <Select
                 value={courseLocation || ''}
@@ -156,7 +156,7 @@ const CourseDialog = (props) => {
                 ))}
               </Select>
             </FormControl>
-            <FormControl fullWidth variant="outlined" style={{ margin: '2%' }}>
+            <FormControl fullWidth variant="outlined" style={{ margin: '1%' }}>
               <InputLabel>Course Location</InputLabel>
               <Select
                 value={rating || ''}
@@ -167,7 +167,7 @@ const CourseDialog = (props) => {
                 ))}
               </Select>
             </FormControl>
-            <FormControl style={{ margin: '2%' }}>
+            <FormControl style={{ margin: '1%' }}>
               <FormLabel>Course completed</FormLabel>
                 <RadioGroup style={{ display: 'inline-block' }} value={completed} onChange={(event) => props.handleChange('completed', event.target.value)}>
                   {completedOptions.map(option => (

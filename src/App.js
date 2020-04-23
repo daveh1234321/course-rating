@@ -159,10 +159,10 @@ class App extends Component {
         />
         <Fab
           onClick={this.handleDialogOpen}
+          color="primary"
           style={{
             position: 'absolute',
             bottom: '2%',
-            background: 'linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%)'
           }}
         >
           <AddIcon />

@@ -6,10 +6,11 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import { useTable } from 'react-table'
-
+import { useTheme } from '@material-ui/core/styles';
 
 
 export function CoursesTable (props) {
+const theme = useTheme();
 
     const columns = React.useMemo(
         () => [
@@ -50,7 +51,7 @@ export function CoursesTable (props) {
         {headerGroups.map(headerGroup => (
           <TableRow {...headerGroup.getHeaderGroupProps()}>          
             {headerGroup.headers.map(column => (
-              <TableCell {...column.getHeaderProps()} style={{ border: 'none', fontSize: 'large', color: 'white'}}>
+              <TableCell {...column.getHeaderProps()} style={{ border: 'none', fontSize: 'large', color: theme.palette.primary.main}}>
                 {column.render('Header').toUpperCase()}
               </TableCell>
             ))}
@@ -64,7 +65,7 @@ export function CoursesTable (props) {
             <TableRow {...row.getRowProps()} onClick={() => props.getCourseById(row.original.id)}>
               {row.cells.map(cell => {
                 return (
-                  <TableCell {...cell.getCellProps()} style={{ border: 'none', fontSize: 'medium', color: 'white' }}>
+                  <TableCell {...cell.getCellProps()} style={{ border: 'none', fontSize: 'medium', color: theme.palette.primary.main }}>
                     {cell.render('Cell')}
                   </TableCell>
                 )
