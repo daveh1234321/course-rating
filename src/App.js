@@ -8,6 +8,7 @@ import { CoursesTable } from './components/CoursesTable';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import validation from './utils/util';
+import moment from 'moment';
 
 class App extends Component {
   constructor(props) {
@@ -77,7 +78,18 @@ class App extends Component {
   }
 
   handleSave = async () => {
-    const error = validation(this.state.courseCopy)
+    let courseCopy;
+    if (this.state.courseCopy.date === '' || this.state.courseCopy.length === '') {
+      courseCopy = Object.assign({}, (this.state.courseCopy));
+      if (this.state.courseCopy.date === '') {
+        courseCopy['date'] = moment().format('DD/MM/YYYY');
+      }
+      if (this.state.courseCopy.length === '') {
+        courseCopy['length'] = moment('00:00', 'HH:mm').format('HH:mm');
+      }
+      this.setState( {courseCopy});
+    } 
+    const error = validation(courseCopy || this.state.courseCopy)
     if (Object.keys(error).length === 0) {
       this.setState({
         course: this.state.courseCopy
@@ -112,7 +124,6 @@ class App extends Component {
   };
 
   handleDialogClose = () => {
-    console.log('Closed')
     this.setState({
       dialogOpen: false,
       edit: false,
