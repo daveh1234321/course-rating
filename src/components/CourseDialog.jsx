@@ -142,6 +142,7 @@ const CourseDialog = (props) => {
               }}
             />
             <DatePicker
+              required
               color="secondary"
               fullWidth
               style={{ margin: '1%' }}
