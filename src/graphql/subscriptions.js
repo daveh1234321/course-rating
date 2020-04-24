@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateCourse = /* GraphQL */ `
-  subscription OnCreateCourse {
-    onCreateCourse {
+  subscription OnCreateCourse($owner: String!) {
+    onCreateCourse(owner: $owner) {
       id
       name
       date
@@ -16,12 +16,13 @@ export const onCreateCourse = /* GraphQL */ `
       length
       completed
       courseLocation
+      owner
     }
   }
 `;
 export const onUpdateCourse = /* GraphQL */ `
-  subscription OnUpdateCourse {
-    onUpdateCourse {
+  subscription OnUpdateCourse($owner: String!) {
+    onUpdateCourse(owner: $owner) {
       id
       name
       date
@@ -34,12 +35,13 @@ export const onUpdateCourse = /* GraphQL */ `
       length
       completed
       courseLocation
+      owner
     }
   }
 `;
 export const onDeleteCourse = /* GraphQL */ `
-  subscription OnDeleteCourse {
-    onDeleteCourse {
+  subscription OnDeleteCourse($owner: String!) {
+    onDeleteCourse(owner: $owner) {
       id
       name
       date
@@ -52,6 +54,7 @@ export const onDeleteCourse = /* GraphQL */ `
       length
       completed
       courseLocation
+      owner
     }
   }
 `;

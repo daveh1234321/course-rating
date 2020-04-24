@@ -19,6 +19,7 @@ export const createCourse = /* GraphQL */ `
       length
       completed
       courseLocation
+      owner
     }
   }
 `;
@@ -40,6 +41,7 @@ export const updateCourse = /* GraphQL */ `
       length
       completed
       courseLocation
+      owner
     }
   }
 `;
@@ -61,6 +63,7 @@ export const deleteCourse = /* GraphQL */ `
       length
       completed
       courseLocation
+      owner
     }
   }
 `;
