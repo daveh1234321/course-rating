@@ -1,20 +1,13 @@
 import React from 'react';
-import { Button, Dialog, DialogTitle, TextField, DialogContent, DialogActions } from '@material-ui/core';
-import { KeyboardTimePicker, DatePicker } from "@material-ui/pickers"
+import { Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import moment from 'moment'
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import FormLabel from '@material-ui/core/FormLabel';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
-import FormHelperText from '@material-ui/core/FormHelperText';
+import TextResponse from './ResponseTypes/TextResponse';
+import TimeResponse from './ResponseTypes/TimeResponse';
+import DateResponse from './ResponseTypes/DateResponse'
+import DropdownResponse from './ResponseTypes/DropdownResponse';
+import RadioResponse from './ResponseTypes/RadioResponse';
+import DialogHeader from './DialogHeader';
+import DialogButtons from './DialogButtons';
 
 const CourseDialog = (props) => {
   const {
@@ -25,183 +18,86 @@ const CourseDialog = (props) => {
     edit,
     handleDelete,
     error
-    
   } = props;
-  const {
-    name,
-    date,
-    description,
-    rating,
-    comments,
-    courseLink,
-    codeLink,
-    creator,
-    length,
-    completed,
-    courseLocation
-  } = course;
 
-  const locations = ['OREILLY', 'BOOK', 'PLURALSIGHT'];
-
-  const ratings = ['1', '2', '3', '4', '5'];
-
-  const completedOptions = ['Yes', 'No'];
+  const questions = [
+    { dataValue: 'name', questionText: 'Title', type: 'TEXTFIELD'},
+    { dataValue: 'description', questionText: 'Description', type: 'TEXTFIELD'},
+    { dataValue: 'comments', questionText: 'Comments', type: 'TEXTFIELD'},
+    { dataValue: 'codeLink', questionText: 'Link to Code', type: 'TEXTFIELD'},
+    { dataValue: 'courseLink', questionText: 'Link to Course', type: 'TEXTFIELD'},
+    { dataValue: 'creator', questionText: 'Course Creator', type: 'TEXTFIELD'},
+    { dataValue: 'length', questionText: 'Course Length', type: 'TIME'},
+    { dataValue: 'date', questionText: 'Course Date', type: 'DATE'},
+    { dataValue: 'courseLocation', questionText: 'Course Location', type: 'DROPDOWN',  data: ['OREILLY', 'BOOK', 'PLURALSIGHT']},
+    { dataValue: 'rating', questionText: 'Course Rating', type: 'DROPDOWN', data: ['1', '2', '3', '4', '5']},
+    { dataValue: 'completed', questionText: 'Course Completed', type: 'RADIO', data: ['Yes', 'No']}
+  ]
 
   return (
     <div>
       {dialogOpen && 
         <Dialog onClose={handleDialogClose} open={dialogOpen} maxWidth='sm' fullWidth={true}>
           <DialogTitle onClose={handleDialogClose} style={{ padding: '3% 5% 3% 5%' }}>
-            <div style={{ display:'inline-flex', alignItems: 'center'}}>
-              <Typography>{edit ? 'Update Course' : 'Add Course'}</Typography>
-              <IconButton onClick={handleDialogClose} style={{ right: '-320%', paddingTop: '0%' }}>
-                <CloseIcon />
-              </IconButton>
-            </div>
+            <DialogHeader edit={edit} handleDialogClose={handleDialogClose}/>
           </DialogTitle>                                
           <DialogContent style={{ padding: '0% 5% 0% 5%', display: 'grid' }}>
-            <TextField
-              fullWidth
-              style={{ margin: '1%' }}
-              required
-              label='Title'
-              variant='outlined'
-              error={error.hasOwnProperty('name')}
-              helperText={error['name']}
-              value={name}
-              onChange={(event) => props.handleChange('name',event.target.value)}
-            />
-            <TextField
-              fullWidth
-              style={{ margin: '1%' }}
-              required
-              label='Description'
-              variant='outlined'
-              error={error.hasOwnProperty('description')}
-              helperText={error['description']}
-              value={description}
-              onChange={(event) => props.handleChange('description',event.target.value)}
-            />
-            <TextField
-              fullWidth
-              style={{ margin: '1%' }}
-              required
-              label='Comments'
-              variant='outlined'
-              error={error.hasOwnProperty('comments')}
-              helperText={error['comments']}
-              value={comments}
-              onChange={(event) => props.handleChange('comments',event.target.value)}
-            />
-            <TextField
-              fullWidth
-              style={{ margin: '1%' }}
-              required
-              label='Link to code'
-              variant='outlined'
-              error={error.hasOwnProperty('codeLink')}
-              helperText={error['codeLink']}
-              value={codeLink}
-              onChange={(event) => props.handleChange('codeLink',event.target.value)}
-            />
-            <TextField
-              fullWidth
-              style={{ margin: '1%' }}
-              required
-              label='Link to course'
-              variant='outlined'
-              error={error.hasOwnProperty('courseLink')}
-              helperText={error['courseLink']}
-              value={courseLink}
-              onChange={(event) => props.handleChange('courseLink',event.target.value)}
-            />
-            <TextField
-              fullWidth
-              style={{ margin: '1%' }}
-              required
-              label='Course creator'
-              variant='outlined'
-              error={error.hasOwnProperty('creator')}
-              helperText={error['creator']}
-              value={creator}
-              onChange={(event) => props.handleChange('creator',event.target.value)}
-            />
-            <KeyboardTimePicker
-              fullWidth
-              variant="outlined"
-              style={{ margin: '1%' }}
-              required
-              clearable
-              ampm={false}
-              label="Length"
-              error={error.hasOwnProperty('length')}
-              helperText={error['length']}
-              value={moment(length || moment('00:00', 'HH:mm'), 'HH:mm')}
-              onChange={(time) => {
-                props.handleChange('length',moment(time).format('HH:mm'))
-              }}
-            />
-            <DatePicker
-              required
-              color="secondary"
-              fullWidth
-              style={{ margin: '1%' }}
-              disableToolbar
-              variant="outlined"
-              label="Date"
-              error={error.hasOwnProperty('date')}
-              format='DD/MM/YYYY'
-              helperText={error['date']}
-              value={moment(date || moment().format('DD/MM/YYYY'), 'DD/MM/YYYY')}
-              onChange={(date) => {
-                props.handleChange('date', moment(date).format('DD/MM/YYYY'))
-              }}
-            />
-            <FormControl
-              fullWidth
-              variant="outlined"
-              style={{ margin: '1%' }}
-              error={error.hasOwnProperty('courseLocation')}
-            >
-              <InputLabel>Course Location</InputLabel>
-              <Select
-                value={courseLocation || ''}
-                onChange={(event) => props.handleChange('courseLocation', event.target.value)}
-              >
-                {locations.map(location => (
-                    <MenuItem key={location} value={location}>{location}</MenuItem>
-                ))}
-              </Select>
-                <FormHelperText>{error['courseLocation']}</FormHelperText>
-            </FormControl>
-            <FormControl
-            fullWidth
-            variant="outlined"
-            style={{ margin: '1%' }}
-            error={error.hasOwnProperty('rating')}>
-              <InputLabel>Course Location</InputLabel>
-              <Select
-                value={rating || ''}
-                onChange={(event) => props.handleChange('rating', event.target.value)}
-              >
-                {ratings.map(rating => (
-                    <MenuItem key={rating} value={rating}>{rating}</MenuItem>
-                ))}
-              </Select>
-                <FormHelperText>{error['rating']}</FormHelperText>
-            </FormControl>
-            <FormControl
-              style={{ margin: '1%' }}
-              error={error.hasOwnProperty('completed')}
-            >
-              <FormLabel>Course completed</FormLabel>
-                <RadioGroup style={{ display: 'inline-block' }} value={completed} onChange={(event) => props.handleChange('completed', event.target.value)}>
-                  {completedOptions.map(option => (
-                      <FormControlLabel key ={option} value={option} control={<Radio />} label={option} />
-                  ))}
-                </RadioGroup>
-                  <FormHelperText>{error['completed']}</FormHelperText>
-            </FormControl>
+            {questions.map(question => {
+              switch(question.type) {
+                case 'TEXTFIELD':
+                  return (
+                    <TextResponse 
+                      error={error}
+                      handleChange={props.handleChange}
+                      questionText={question.questionText}
+                      dataValue={question.dataValue}
+                      response={course[question.dataValue]}
+                    />
+                  )
+                case 'TIME': 
+                  return (
+                    <TimeResponse 
+                      error={error}
+                      handleChange={props.handleChange}
+                      questionText={question.questionText}
+                      dataValue={question.dataValue}
+                      response={course[question.dataValue]}
+                    />
+                  )
+                case 'DATE': 
+                  return (
+                    <DateResponse 
+                      error={error}
+                      handleChange={props.handleChange}
+                      questionText={question.questionText}
+                      dataValue={question.dataValue}
+                      response={course[question.dataValue]}
+                    />
+                  )
+                case 'DROPDOWN':
+                  return (
+                    <DropdownResponse 
+                      error={error}
+                      handleChange={props.handleChange}
+                      questionText={question.questionText}
+                      dataValue={question.dataValue}
+                      response={course[question.dataValue]}
+                      data={question.data}
+                    />
+                  )
+                  case 'RADIO':
+                    return (
+                      <RadioResponse 
+                        error={error}
+                        handleChange={props.handleChange}
+                        questionText={question.questionText}
+                        dataValue={question.dataValue}
+                        response={course[question.dataValue]}
+                        data={question.data}
+                      />
+                    )
+                default: return null
+              }})}
           </DialogContent>
           <DialogActions
             style={{
@@ -211,33 +107,12 @@ const CourseDialog = (props) => {
               justifyContent: 'space-between'
             }}
           >
-            <Button
-                size="large"
-                variant="outlined"
-                onClick={handleDialogClose}
-                color="primary"
-              >
-                Cancel
-              </Button>
-            {edit ? 
-              <Button
-                size="large"
-                variant="outlined"
-                onClick={handleDelete}
-                color="primary"
-              >
-                Delete
-              </Button> :
-              null
-            }
-            <Button
-              size="large"
-              variant="outlined"
-              onClick={handleSave}
-              color="primary"
-            >
-              {edit ? 'Update' : 'Save'}
-            </Button>
+            <DialogButtons
+              edit={edit}
+              handleDelete={handleDelete}
+              handleDialogClose={handleDialogClose}
+              handleSave={handleSave}
+            />
           </DialogActions>
         </Dialog>
       }
