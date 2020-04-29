@@ -6,7 +6,8 @@ export const onCreateCourse = /* GraphQL */ `
     onCreateCourse(owner: $owner) {
       id
       name
-      date
+      startDate
+      endDate
       description
       rating
       comments
@@ -25,7 +26,8 @@ export const onUpdateCourse = /* GraphQL */ `
     onUpdateCourse(owner: $owner) {
       id
       name
-      date
+      startDate
+      endDate
       description
       rating
       comments
@@ -44,7 +46,8 @@ export const onDeleteCourse = /* GraphQL */ `
     onDeleteCourse(owner: $owner) {
       id
       name
-      date
+      startDate
+      endDate
       description
       rating
       comments

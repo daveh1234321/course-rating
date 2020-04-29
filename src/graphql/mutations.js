@@ -9,7 +9,8 @@ export const createCourse = /* GraphQL */ `
     createCourse(input: $input, condition: $condition) {
       id
       name
-      date
+      startDate
+      endDate
       description
       rating
       comments
@@ -31,7 +32,8 @@ export const updateCourse = /* GraphQL */ `
     updateCourse(input: $input, condition: $condition) {
       id
       name
-      date
+      startDate
+      endDate
       description
       rating
       comments
@@ -53,7 +55,8 @@ export const deleteCourse = /* GraphQL */ `
     deleteCourse(input: $input, condition: $condition) {
       id
       name
-      date
+      startDate
+      endDate
       description
       rating
       comments
