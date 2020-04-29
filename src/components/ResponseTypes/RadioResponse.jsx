@@ -11,11 +11,11 @@ const RadioResponse = (props) => {
   const { error, questionText, dataValue, data, response } = props;
   return(
     <FormControl
-      style={{ margin: '1%' }}
+      className='response'
       error={error.hasOwnProperty(dataValue)}
     >
       <FormLabel>{questionText}</FormLabel>
-        <RadioGroup style={{ display: 'inline-block' }} value={response} onChange={(event) => props.handleChange(dataValue, event.target.value)}>
+        <RadioGroup className='radioGroup' value={response} onChange={(event) => props.handleChange(dataValue, event.target.value)}>
           {data.map(option => (
             <FormControlLabel key ={option} value={option} control={<Radio />} label={option} />
           ))}

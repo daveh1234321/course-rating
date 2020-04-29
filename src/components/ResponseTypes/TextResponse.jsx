@@ -6,8 +6,8 @@ const TextResponse = (props) => {
   const { error, questionText, dataValue, response } = props;
   return(
     <TextField
+      className='response'
       fullWidth
-      style={{ margin: '1%' }}
       required
       label={questionText}
       variant='outlined'

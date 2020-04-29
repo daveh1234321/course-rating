@@ -7,9 +7,9 @@ import PropTypes from 'prop-types';
 const DialogHeader = (props) => {
   const { edit, handleDialogClose } = props;
   return(
-      <div style={{ display:'inline-flex', alignItems: 'center'}}>
+      <div className='dialogHeader'>
         <Typography>{edit ? 'Update Course' : 'Add Course'}</Typography>
-        <IconButton onClick={handleDialogClose} style={{ right: '-320%', paddingTop: '0%' }}>
+        <IconButton className='dialogCloseButon' onClick={handleDialogClose}>
           <CloseIcon />
         </IconButton>
       </div>

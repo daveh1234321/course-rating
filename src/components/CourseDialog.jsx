@@ -38,10 +38,10 @@ const CourseDialog = (props) => {
     <div>
       {dialogOpen && 
         <Dialog onClose={handleDialogClose} open={dialogOpen} maxWidth='sm' fullWidth={true}>
-          <DialogTitle onClose={handleDialogClose} style={{ padding: '3% 5% 3% 5%' }}>
+          <DialogTitle className='dialogTitle' onClose={handleDialogClose}>
             <DialogHeader edit={edit} handleDialogClose={handleDialogClose}/>
           </DialogTitle>                                
-          <DialogContent style={{ padding: '0% 5% 0% 5%', display: 'grid' }}>
+          <DialogContent className='dialogContent'>
             {questions.map(question => {
               switch(question.type) {
                 case 'TEXTFIELD':
@@ -99,14 +99,7 @@ const CourseDialog = (props) => {
                 default: return null
               }})}
           </DialogContent>
-          <DialogActions
-            style={{
-              paddingBottom: '3%',
-              paddingRight: '3%',
-              paddingLeft: '3%',
-              justifyContent: 'space-between'
-            }}
-          >
+          <DialogActions className='dialogActions'>
             <DialogButtons
               edit={edit}
               handleDelete={handleDelete}

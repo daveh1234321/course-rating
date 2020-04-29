@@ -1,8 +1,6 @@
 import React, { Component, Suspense, lazy } from 'react';
-import './App.css';
+import './App.scss';
 import Navigation from './components/Navigation'
-// import CourseDialog from './components/CourseDialog'
-import { CoursesTable } from './components/CoursesTable'
 import { withAuthenticator } from 'aws-amplify-react';
 import * as api from './utils/api';
 import Fab from '@material-ui/core/Fab';
@@ -11,7 +9,7 @@ import validation from './utils/util';
 import moment from 'moment';
 
 const CourseDialog = lazy(() => import('./components/CourseDialog'))
-// const CoursesTable = lazy(()=> import('./components/CoursesTable'));
+const CoursesTable = lazy(()=> import('./components/CoursesTable'));
 
 class App extends Component {
   constructor(props) {
@@ -171,10 +169,6 @@ class App extends Component {
           className='addCourseButton'
           onClick={this.handleDialogOpen}
           color="secondary"
-          style={{
-            position: 'absolute',
-            bottom: '2%'
-          }}
         >
           <AddIcon />
         </Fab>

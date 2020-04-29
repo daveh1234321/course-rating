@@ -7,10 +7,10 @@ const DateResponse = (props) => {
   const { error, questionText, dataValue, response } = props;
   return(
     <DatePicker
+    className='response'
       required
       color="secondary"
       fullWidth
-      style={{ margin: '1%' }}
       disableToolbar
       variant="outlined"
       label={questionText}

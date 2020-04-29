@@ -10,9 +10,9 @@ const DropdownResponse = (props) => {
   const { error, questionText, dataValue, data, response } = props;
   return (
     <FormControl
+      className='response'
       fullWidth
       variant="outlined"
-      style={{ margin: '1%' }}
       error={error.hasOwnProperty(dataValue)}
     >
       <InputLabel>{questionText}</InputLabel>

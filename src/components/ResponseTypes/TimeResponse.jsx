@@ -7,9 +7,9 @@ const TimeResponse = (props) => {
   const { error, questionText, dataValue, response } = props;
   return (
     <KeyboardTimePicker
+      className='response'
       fullWidth
       variant="outlined"
-      style={{ margin: '1%' }}
       required
       clearable
       ampm={false}
