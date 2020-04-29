@@ -6,7 +6,8 @@ export const getCourse = /* GraphQL */ `
     getCourse(id: $id) {
       id
       name
-      date
+      startDate
+      endDate
       description
       rating
       comments
@@ -30,7 +31,8 @@ export const listCourses = /* GraphQL */ `
       items {
         id
         name
-        date
+        startDate
+        endDate
         description
         rating
         comments

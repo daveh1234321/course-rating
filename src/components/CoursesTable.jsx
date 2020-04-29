@@ -21,9 +21,12 @@ function CoursesTable (props) {
                 Header: 'Course Creator',
                 accessor: 'creator', // accessor is the "key" in the data
             },{
-                Header: 'Course Date',
-                accessor: 'date', // accessor is the "key" in the data
+                Header: 'Course Start Date',
+                accessor: 'startDate', // accessor is the "key" in the data
             },{
+              Header: 'Course Completion Date',
+              accessor: 'endDate', // accessor is the "key" in the data
+          },{
                 Header: 'Course Rating',
                 accessor: 'rating', // accessor is the "key" in the data
             },{
@@ -41,7 +44,7 @@ function CoursesTable (props) {
     data,
   })
 
-  // Render the UI for your tableame	InfotHeaderGroupProps()}>
+  // Render the UI for your tablename	InfotHeaderGroupProps()}>
   return (
     <MaUTable {...getTableProps()}>
       <TableHead>

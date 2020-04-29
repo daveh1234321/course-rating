@@ -1,17 +1,18 @@
 type Course @model @auth(rules: [{ allow: owner }]){
   id: ID!
   name: String!
-  date: String
-  description: String
-  rating: String
-  comments: String
-  courseLink: String
-  codeLink: String
-  creator: String
-  length: String
-  completed: String
-  courseLocation: CourseLocation
-  owner: String
+  startDate: String!
+  endDate: String!
+  description: String!
+  rating: String!
+  comments: String!
+  courseLink: String!
+  codeLink: String!
+  creator: String!
+  length: String!
+  completed: String!
+  courseLocation: CourseLocation!
+  owner: String!
 }
 
 enum CourseLocation {

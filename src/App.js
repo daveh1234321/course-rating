@@ -20,7 +20,8 @@ class App extends Component {
       edit: false,
       course: {
         name: '',
-        date: '',
+        startDate: '',
+        endDate: '',
         description: '',
         rating: null,
         comments: '',
@@ -33,7 +34,8 @@ class App extends Component {
       },
       courseCopy: {
         name: '',
-        date: '',
+        startDate: '',
+        endDate: '',
         description: '',
         rating: null,
         comments: '',
@@ -74,6 +76,9 @@ class App extends Component {
   handleChange = async (property, value) =>  {
     let courseCopy = Object.assign({}, (this.state.courseCopy));
     courseCopy[property] = value;
+    if (property === 'completed' && value === 'Yes') {
+      courseCopy['endDate'] = moment().format('DD/MM/YYYY');
+    }
 
     this.setState( {courseCopy});
   }
@@ -82,8 +87,8 @@ class App extends Component {
     let courseCopy;
     if (this.state.courseCopy.date === '' || this.state.courseCopy.length === '') {
       courseCopy = Object.assign({}, (this.state.courseCopy));
-      if (this.state.courseCopy.date === '') {
-        courseCopy['date'] = moment().format('DD/MM/YYYY');
+      if (this.state.courseCopy.startDate === '') {
+        courseCopy['startDate'] = moment().format('DD/MM/YYYY');
       }
       if (this.state.courseCopy.length === '') {
         courseCopy['length'] = moment('00:00', 'HH:mm').format('HH:mm');
@@ -130,7 +135,8 @@ class App extends Component {
       edit: false,
       courseCopy: {
         name: '',
-        date: '',
+        startDate: '',
+        endDate: '',
         description: '',
         rating: null,
         comments: '',
