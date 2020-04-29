@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component, Suspense, lazy } from 'react';
+import './App.scss';
+import Navigation from './components/Navigation'
 import { withAuthenticator } from 'aws-amplify-react';
-import Navigation from './components/Navigation';
-import CourseDialog from './components/CourseDialog';
 import * as api from './utils/api';
-import { CoursesTable } from './components/CoursesTable';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import validation from './utils/util';
 import moment from 'moment';
+
+const CourseDialog = lazy(() => import('./components/CourseDialog'))
+const CoursesTable = lazy(()=> import('./components/CoursesTable'));
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +20,8 @@ class App extends Component {
       edit: false,
       course: {
         name: '',
-        date: '',
+        startDate: '',
+        endDate: '',
         description: '',
         rating: null,
         comments: '',
@@ -32,7 +34,8 @@ class App extends Component {
       },
       courseCopy: {
         name: '',
-        date: '',
+        startDate: '',
+        endDate: '',
         description: '',
         rating: null,
         comments: '',
@@ -73,6 +76,9 @@ class App extends Component {
   handleChange = async (property, value) =>  {
     let courseCopy = Object.assign({}, (this.state.courseCopy));
     courseCopy[property] = value;
+    if (property === 'completed' && value === 'Yes') {
+      courseCopy['endDate'] = moment().format('DD/MM/YYYY');
+    }
 
     this.setState( {courseCopy});
   }
@@ -81,8 +87,8 @@ class App extends Component {
     let courseCopy;
     if (this.state.courseCopy.date === '' || this.state.courseCopy.length === '') {
       courseCopy = Object.assign({}, (this.state.courseCopy));
-      if (this.state.courseCopy.date === '') {
-        courseCopy['date'] = moment().format('DD/MM/YYYY');
+      if (this.state.courseCopy.startDate === '') {
+        courseCopy['startDate'] = moment().format('DD/MM/YYYY');
       }
       if (this.state.courseCopy.length === '') {
         courseCopy['length'] = moment('00:00', 'HH:mm').format('HH:mm');
@@ -129,7 +135,8 @@ class App extends Component {
       edit: false,
       courseCopy: {
         name: '',
-        date: '',
+        startDate: '',
+        endDate: '',
         description: '',
         rating: null,
         comments: '',
@@ -147,6 +154,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Suspense fallback={<div>Loading...</div>}>
         <Navigation />
         <CoursesTable
           data={this.state.courses}
@@ -164,15 +172,13 @@ class App extends Component {
           error={this.state.error}
         />
         <Fab
+          className='addCourseButton'
           onClick={this.handleDialogOpen}
           color="secondary"
-          style={{
-            position: 'absolute',
-            bottom: '2%',
-          }}
         >
           <AddIcon />
         </Fab>
+        </Suspense>
       </div>
     );
   }

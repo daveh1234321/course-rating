@@ -6,11 +6,8 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import { useTable } from 'react-table'
-import { useTheme } from '@material-ui/core/styles';
 
-
-export function CoursesTable (props) {
-const theme = useTheme();
+function CoursesTable (props) {
 
     const columns = React.useMemo(
         () => [
@@ -24,9 +21,12 @@ const theme = useTheme();
                 Header: 'Course Creator',
                 accessor: 'creator', // accessor is the "key" in the data
             },{
-                Header: 'Course Date',
-                accessor: 'date', // accessor is the "key" in the data
+                Header: 'Course Start Date',
+                accessor: 'startDate', // accessor is the "key" in the data
             },{
+              Header: 'Course Completion Date',
+              accessor: 'endDate', // accessor is the "key" in the data
+          },{
                 Header: 'Course Rating',
                 accessor: 'rating', // accessor is the "key" in the data
             },{
@@ -44,14 +44,14 @@ const theme = useTheme();
     data,
   })
 
-  // Render the UI for your tableame	InfotHeaderGroupProps()}>
+  // Render the UI for your tablename	InfotHeaderGroupProps()}>
   return (
     <MaUTable {...getTableProps()}>
       <TableHead>
         {headerGroups.map(headerGroup => (
           <TableRow {...headerGroup.getHeaderGroupProps()}>          
             {headerGroup.headers.map(column => (
-              <TableCell {...column.getHeaderProps()} style={{ border: 'none', fontSize: 'large', color: theme.palette.secondary.main}}>
+              <TableCell className='tableCellHeader' {...column.getHeaderProps()}>
                 {column.render('Header').toUpperCase()}
               </TableCell>
             ))}
@@ -65,7 +65,7 @@ const theme = useTheme();
             <TableRow {...row.getRowProps()} onClick={() => props.getCourseById(row.original.id)}>
               {row.cells.map(cell => {
                 return (
-                  <TableCell {...cell.getCellProps()} style={{ border: 'none', fontSize: 'medium', color: theme.palette.secondary.main }}>
+                  <TableCell className='tableCell' {...cell.getCellProps()}>
                     {cell.render('Cell')}
                   </TableCell>
                 )
@@ -77,6 +77,8 @@ const theme = useTheme();
     </MaUTable>
   )
 }
+
+export default CoursesTable;
 
 CoursesTable.prototypes = {
     data: PropTypes.arrayOf().isRequired,
