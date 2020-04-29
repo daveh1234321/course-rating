@@ -76,7 +76,7 @@ class App extends Component {
   handleChange = async (property, value) =>  {
     let courseCopy = Object.assign({}, (this.state.courseCopy));
     courseCopy[property] = value;
-    if (property === 'completed') {
+    if (property === 'completed' && value === 'Yes') {
       courseCopy['endDate'] = moment().format('DD/MM/YYYY');
     }
 
