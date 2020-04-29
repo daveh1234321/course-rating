@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component, Suspense, lazy } from 'react';
+import './App.scss';
+import Navigation from './components/Navigation'
 import { withAuthenticator } from 'aws-amplify-react';
-import Navigation from './components/Navigation';
-import CourseDialog from './components/CourseDialog';
 import * as api from './utils/api';
-import { CoursesTable } from './components/CoursesTable';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import validation from './utils/util';
 import moment from 'moment';
+
+const CourseDialog = lazy(() => import('./components/CourseDialog'))
+const CoursesTable = lazy(()=> import('./components/CoursesTable'));
 
 class App extends Component {
   constructor(props) {
@@ -147,6 +148,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Suspense fallback={<div>Loading...</div>}>
         <Navigation />
         <CoursesTable
           data={this.state.courses}
@@ -164,15 +166,13 @@ class App extends Component {
           error={this.state.error}
         />
         <Fab
+          className='addCourseButton'
           onClick={this.handleDialogOpen}
           color="secondary"
-          style={{
-            position: 'absolute',
-            bottom: '2%',
-          }}
         >
           <AddIcon />
         </Fab>
+        </Suspense>
       </div>
     );
   }

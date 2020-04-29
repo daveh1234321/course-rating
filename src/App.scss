@@ -1,0 +1,69 @@
+.App {
+  text-align: center;
+}
+
+.addCourseButton {
+  position: absolute !important;
+  bottom: 2% !important;
+}
+
+.response {
+  margin: 1% !important;
+}
+
+.tableCell {
+  border: none !important;
+  font-size: medium !important;
+  color: #ffffff !important;
+}
+
+.tableCellHeader {
+  border: none !important;
+  font-size: large !important;
+  color: #ffffff !important;
+}
+
+.dialogTitle {
+  padding: 3% 5% 3% 5% !important;
+}
+
+.dialogContent {
+  padding: 0% 5% 0% 5%;
+  display: grid;
+}
+
+.dialogActions {
+  padding-bottom: 3% !important;
+  padding-right: 3% !important;
+  padding-left: 3% !important;
+  justify-content: space-between !important;
+}
+
+.dialogHeader {
+  display: inline-flex;
+  align-items: center;
+}
+
+.dialogCloseButon {
+  right: -320%;
+  padding-top: 0%;
+}
+
+nav {
+  display: inline-flex;
+  align-items: center;
+  padding-top: 1%;
+}
+
+.navTitle {
+  font-size: x-large !important;
+  font-weight: 600 !important;
+}
+
+.navDivider {
+  width: 95%;
+}
+
+.radioGroup {
+  display: inline-block;
+}
