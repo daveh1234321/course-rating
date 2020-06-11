@@ -12,25 +12,25 @@ function CoursesTable (props) {
     const columns = React.useMemo(
         () => [
             {
-                Header: 'Course Name',
+                Header: 'Title',
                 accessor: 'name', // accessor is the "key" in the data
             },{
-                Header: 'Course Location',
+                Header: 'Location',
                 accessor: 'courseLocation', // accessor is the "key" in the data
             },{
-                Header: 'Course Creator',
+                Header: 'Creator',
                 accessor: 'creator', // accessor is the "key" in the data
             },{
-                Header: 'Course Start Date',
+                Header: 'Start Date',
                 accessor: 'startDate', // accessor is the "key" in the data
             },{
-              Header: 'Course Completion Date',
+              Header: 'Completion Date',
               accessor: 'endDate', // accessor is the "key" in the data
           },{
-                Header: 'Course Rating',
+                Header: 'Rating',
                 accessor: 'rating', // accessor is the "key" in the data
             },{
-                Header: 'Course Completed',
+                Header: 'Completed',
                 accessor: 'completed', // accessor is the "key" in the data
             }
         ],
