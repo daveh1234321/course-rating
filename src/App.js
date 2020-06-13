@@ -1,6 +1,7 @@
 import React, { Component, Suspense, lazy } from 'react';
 import './App.scss';
 import Navigation from './components/Navigation'
+import { withAuthenticator } from 'aws-amplify-react';
 import * as api from './utils/api';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
@@ -151,7 +152,6 @@ class App extends Component {
   }
 
   render() {
-    if (this.props.authState === 'signedIn') {
     return (
       <div className="App">
         <Suspense fallback={<div>Loading...</div>}>
@@ -181,10 +181,9 @@ class App extends Component {
         </Suspense>
       </div>
     );
-    } else {
-      return null;
-    }
   }
 }
 
-export default App;
+export default withAuthenticator(App, {
+  includeGreetings: true
+});
