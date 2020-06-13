@@ -27,7 +27,7 @@ const CourseDialog = (props) => {
     { dataValue: 'codeLink', questionText: 'Link to Code', type: 'TEXTFIELD'},
     { dataValue: 'courseLink', questionText: 'Link to Course', type: 'TEXTFIELD'},
     { dataValue: 'creator', questionText: 'Course Creator', type: 'TEXTFIELD'},
-    { dataValue: 'length', questionText: 'Course Length', type: 'TIME'},
+    { dataValue: 'length', questionText: 'Course Length', type: 'TEXTFIELD'},
     { dataValue: 'startDate', questionText: 'Course Start Date', type: 'DATE'},
     { dataValue: 'courseLocation', questionText: 'Course Location', type: 'DROPDOWN',  data: ['OREILLY', 'BOOK', 'PLURALSIGHT']},
     { dataValue: 'rating', questionText: 'Course Rating', type: 'DROPDOWN', data: ['1', '2', '3', '4', '5']},
