@@ -10,7 +10,7 @@
     "@testing-library/jest-dom": "^5.10.0",
     "@testing-library/react": "^10.3.0",
     "@testing-library/user-event": "^11.4.2",
-    "aws-amplify": "^3.0.17",
+    "aws-amplify": "^3.0.18",
     "aws-amplify-react": "^4.1.17",
     "moment": "^2.26.0",
     "node-sass": "^4.14.1",
