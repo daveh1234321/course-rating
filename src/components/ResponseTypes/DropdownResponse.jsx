@@ -7,12 +7,14 @@ import Select from '@material-ui/core/Select';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
 const DropdownResponse = (props) => {
-  const { error, questionText, dataValue, data, response } = props;
+  const {
+    error, questionText, dataValue, data, response,
+  } = props;
   return (
     <FormControl
       className='response'
       fullWidth
-      variant="outlined"
+      variant='outlined'
       error={error.hasOwnProperty(dataValue)}
     >
       <InputLabel>{questionText}</InputLabel>
@@ -20,14 +22,14 @@ const DropdownResponse = (props) => {
         value={response || ''}
         onChange={(event) => props.handleChange(dataValue, event.target.value)}
       >
-        {data.map(items => (
-            <MenuItem key={items} value={items}>{items}</MenuItem>
+        {data.map((items) => (
+          <MenuItem key={items} value={items}>{items}</MenuItem>
         ))}
       </Select>
-        <FormHelperText>{error[dataValue]}</FormHelperText>
+      <FormHelperText>{error[dataValue]}</FormHelperText>
     </FormControl>
-  )
-}
+  );
+};
 
 export default DropdownResponse;
 
@@ -36,6 +38,6 @@ DropdownResponse.propTypes = {
   questionText: PropTypes.string.isRequired,
   dataValue: PropTypes.string.isRequired,
   data: PropTypes.arrayOf().isRequired,
-  response: PropTypes.string.isRequired
+  response: PropTypes.string.isRequired,
 
-}
+};

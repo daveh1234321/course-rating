@@ -8,22 +8,24 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 
 const RadioResponse = (props) => {
-  const { error, questionText, dataValue, data, response } = props;
-  return(
+  const {
+    error, questionText, dataValue, data, response,
+  } = props;
+  return (
     <FormControl
       className='response'
       error={error.hasOwnProperty(dataValue)}
     >
       <FormLabel>{questionText}</FormLabel>
-        <RadioGroup className='radioGroup' value={response} onChange={(event) => props.handleChange(dataValue, event.target.value)}>
-          {data.map(option => (
-            <FormControlLabel key ={option} value={option} control={<Radio color='primary'/>} label={option} />
-          ))}
-        </RadioGroup>
-        <FormHelperText>{error[dataValue]}</FormHelperText>
+      <RadioGroup className='radioGroup' value={response} onChange={(event) => props.handleChange(dataValue, event.target.value)}>
+        {data.map((option) => (
+          <FormControlLabel key={option} value={option} control={<Radio color='primary' />} label={option} />
+        ))}
+      </RadioGroup>
+      <FormHelperText>{error[dataValue]}</FormHelperText>
     </FormControl>
-  )
-}
+  );
+};
 
 export default RadioResponse;
 
@@ -32,5 +34,5 @@ RadioResponse.propTypes = {
   questionText: PropTypes.string.isRequired,
   dataValue: PropTypes.string.isRequired,
   data: PropTypes.arrayOf().isRequired,
-  response: PropTypes.string.isRequired
-}
+  response: PropTypes.string.isRequired,
+};

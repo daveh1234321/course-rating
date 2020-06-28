@@ -1,56 +1,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MaUTable from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import { useTable } from 'react-table'
+import MaUTable from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import { useTable } from 'react-table';
 
-function CoursesTable (props) {
+function CoursesTable(props) {
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Course Name',
+        accessor: 'name', // accessor is the "key" in the data
+      }, {
+        Header: 'Course Location',
+        accessor: 'courseLocation', // accessor is the "key" in the data
+      }, {
+        Header: 'Course Creator',
+        accessor: 'creator', // accessor is the "key" in the data
+      }, {
+        Header: 'Course Start Date',
+        accessor: 'startDate', // accessor is the "key" in the data
+      }, {
+        Header: 'Course Completion Date',
+        accessor: 'endDate', // accessor is the "key" in the data
+      }, {
+        Header: 'Course Rating',
+        accessor: 'rating', // accessor is the "key" in the data
+      }, {
+        Header: 'Course Completed',
+        accessor: 'completed', // accessor is the "key" in the data
+      },
+    ],
+    [],
+  );
 
-    const columns = React.useMemo(
-        () => [
-            {
-                Header: 'Course Name',
-                accessor: 'name', // accessor is the "key" in the data
-            },{
-                Header: 'Course Location',
-                accessor: 'courseLocation', // accessor is the "key" in the data
-            },{
-                Header: 'Course Creator',
-                accessor: 'creator', // accessor is the "key" in the data
-            },{
-                Header: 'Course Start Date',
-                accessor: 'startDate', // accessor is the "key" in the data
-            },{
-              Header: 'Course Completion Date',
-              accessor: 'endDate', // accessor is the "key" in the data
-          },{
-                Header: 'Course Rating',
-                accessor: 'rating', // accessor is the "key" in the data
-            },{
-                Header: 'Course Completed',
-                accessor: 'completed', // accessor is the "key" in the data
-            }
-        ],
-        []
-      )
-
-    const { data } = props;
+  const { data } = props;
   // Use the state and functions returned from useTable to build your UI
-  const { getTableProps, headerGroups, rows, prepareRow } = useTable({
+  const {
+    getTableProps, headerGroups, rows, prepareRow,
+  } = useTable({
     columns,
     data,
-  })
+  });
 
   // Render the UI for your tablename	InfotHeaderGroupProps()}>
   return (
     <MaUTable {...getTableProps()}>
       <TableHead>
-        {headerGroups.map(headerGroup => (
-          <TableRow {...headerGroup.getHeaderGroupProps()}>          
-            {headerGroup.headers.map(column => (
+        {headerGroups.map((headerGroup) => (
+          <TableRow {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map((column) => (
               <TableCell className='tableCellHeader' {...column.getHeaderProps()}>
                 {column.render('Header').toUpperCase()}
               </TableCell>
@@ -60,27 +61,25 @@ function CoursesTable (props) {
       </TableHead>
       <TableBody>
         {rows.map((row, i) => {
-          prepareRow(row)
+          prepareRow(row);
           return (
             <TableRow {...row.getRowProps()} onClick={() => props.getCourseById(row.original.id)}>
-              {row.cells.map(cell => {
-                return (
-                  <TableCell className='tableCell' {...cell.getCellProps()}>
-                    {cell.render('Cell')}
-                  </TableCell>
-                )
-              })}
+              {row.cells.map((cell) => (
+                <TableCell className='tableCell' {...cell.getCellProps()}>
+                  {cell.render('Cell')}
+                </TableCell>
+              ))}
             </TableRow>
-          )
+          );
         })}
       </TableBody>
     </MaUTable>
-  )
+  );
 }
 
 export default CoursesTable;
 
 CoursesTable.prototypes = {
-    data: PropTypes.arrayOf().isRequired,
-    getCourseById: PropTypes.func.isRequired
-}
+  data: PropTypes.arrayOf().isRequired,
+  getCourseById: PropTypes.func.isRequired,
+};

@@ -6,19 +6,19 @@ import PropTypes from 'prop-types';
 
 const DialogHeader = (props) => {
   const { edit, handleDialogClose } = props;
-  return(
-      <div className='dialogHeader'>
-        <Typography>{edit ? 'Update Course' : 'Add Course'}</Typography>
-        <IconButton className='dialogCloseButon' onClick={handleDialogClose}>
-          <CloseIcon />
-        </IconButton>
-      </div>
-  )
-}
+  return (
+    <div className='dialogHeader'>
+      <Typography>{edit ? 'Update Course' : 'Add Course'}</Typography>
+      <IconButton className='dialogCloseButon' onClick={handleDialogClose}>
+        <CloseIcon />
+      </IconButton>
+    </div>
+  );
+};
 
 export default DialogHeader;
 
 DialogHeader.propTypes = {
   edit: PropTypes.bool.isRequired,
-  handleDialogClose: PropTypes.func.isRequired
-}
+  handleDialogClose: PropTypes.func.isRequired,
+};
