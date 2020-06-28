@@ -4,6 +4,7 @@ import * as mutations from '../graphql/mutations';
 import * as subscriptions from '../graphql/subscriptions'
 
 export const courseCreate = async (course) => {
+  console.log(course)
   const newCourse = await API.graphql(graphqlOperation(mutations.createCourse, {input: course}));
   return newCourse;
 };

@@ -14,10 +14,11 @@ export const onCreateCourse = /* GraphQL */ `
       courseLink
       codeLink
       creator
-      length
       completed
       courseLocation
       owner
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -34,10 +35,11 @@ export const onUpdateCourse = /* GraphQL */ `
       courseLink
       codeLink
       creator
-      length
       completed
       courseLocation
       owner
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -54,10 +56,11 @@ export const onDeleteCourse = /* GraphQL */ `
       courseLink
       codeLink
       creator
-      length
       completed
       courseLocation
       owner
+      createdAt
+      updatedAt
     }
   }
 `;
