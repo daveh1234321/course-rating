@@ -14,10 +14,11 @@ export const getCourse = /* GraphQL */ `
       courseLink
       codeLink
       creator
-      length
       completed
       courseLocation
       owner
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -39,10 +40,11 @@ export const listCourses = /* GraphQL */ `
         courseLink
         codeLink
         creator
-        length
         completed
         courseLocation
         owner
+        createdAt
+        updatedAt
       }
       nextToken
     }

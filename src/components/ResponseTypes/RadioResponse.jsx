@@ -17,7 +17,7 @@ const RadioResponse = (props) => {
       <FormLabel>{questionText}</FormLabel>
         <RadioGroup className='radioGroup' value={response} onChange={(event) => props.handleChange(dataValue, event.target.value)}>
           {data.map(option => (
-            <FormControlLabel key ={option} value={option} control={<Radio />} label={option} />
+            <FormControlLabel key ={option} value={option} control={<Radio color='primary'/>} label={option} />
           ))}
         </RadioGroup>
         <FormHelperText>{error[dataValue]}</FormHelperText>
