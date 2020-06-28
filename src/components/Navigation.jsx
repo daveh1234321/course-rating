@@ -7,8 +7,8 @@ const Navigation = () => {
     <>
       <nav>
         <Typography className='navTitle' color="secondary">Course Ratings</Typography>
-      </nav>
       <hr className='navDivider' />
+      </nav>
     </>
   )
 }

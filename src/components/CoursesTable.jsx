@@ -46,7 +46,7 @@ function CoursesTable (props) {
 
   // Render the UI for your tablename	InfotHeaderGroupProps()}>
   return (
-    <MaUTable {...getTableProps()}>
+    <MaUTable className='classTable' {...getTableProps()} >
       <TableHead>
         {headerGroups.map(headerGroup => (
           <TableRow {...headerGroup.getHeaderGroupProps()}>          

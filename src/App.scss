@@ -1,26 +1,40 @@
 .App {
   text-align: center;
+  display: grid;
+  grid-template-columns: 5% 18% 18% 18% 18% 18% 5%;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    ". header header header header header ."
+    ". table table table table table ."
+    ". . . courseButton . . .";
+}
+
+nav {
+  grid-area: header;
+  align-items: center;
+  padding-top: 1%;
+}
+
+.navTitle {
+  font-size: x-large !important;
+  font-weight: 600 !important;
+}
+
+.classTable {
+  grid-area: table;
+  color: #ffffff !important;
+  border: none !important;
+  & .tableCell {
+    font-size: medium !important;
+  }
+  & .tableCellHeader {
+    font-size: large !important;
+  }
 }
 
 .addCourseButton {
-  position: absolute !important;
-  bottom: 2% !important;
-}
-
-.response {
-  margin: 1% !important;
-}
-
-.tableCell {
-  border: none !important;
-  font-size: medium !important;
-  color: #ffffff !important;
-}
-
-.tableCellHeader {
-  border: none !important;
-  font-size: large !important;
-  color: #ffffff !important;
+  grid-area: courseButton;
+  place-self: center;
 }
 
 .dialogTitle {
@@ -47,21 +61,6 @@
 .dialogCloseButon {
   right: -320%;
   padding-top: 0%;
-}
-
-nav {
-  display: inline-flex;
-  align-items: center;
-  padding-top: 1%;
-}
-
-.navTitle {
-  font-size: x-large !important;
-  font-weight: 600 !important;
-}
-
-.navDivider {
-  width: 95%;
 }
 
 .radioGroup {
