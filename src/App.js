@@ -1,7 +1,7 @@
 import React, { Component, Suspense, lazy } from 'react';
 import './App.scss';
 import Navigation from './components/Navigation'
-import { withAuthenticator } from 'aws-amplify-react';
+import { AmplifyAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import * as api from './utils/api';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
@@ -28,7 +28,6 @@ class App extends Component {
         courseLink: '',
         codeLink: '',
         creator: '',
-        length: '',
         completed: '',
         courseLocation: null
       },
@@ -42,7 +41,6 @@ class App extends Component {
         courseLink: '',
         codeLink: '',
         creator: '',
-        length: '',
         completed: '',
         courseLocation: null
       },
@@ -79,19 +77,16 @@ class App extends Component {
     if (property === 'completed' && value === 'Yes') {
       courseCopy['endDate'] = moment().format('DD/MM/YYYY');
     }
-
+    console.log(courseCopy)
     this.setState( {courseCopy});
   }
 
   handleSave = async () => {
     let courseCopy;
-    if (this.state.courseCopy.date === '' || this.state.courseCopy.length === '') {
+    if (this.state.courseCopy.date === '') {
       courseCopy = Object.assign({}, (this.state.courseCopy));
       if (this.state.courseCopy.startDate === '') {
         courseCopy['startDate'] = moment().format('DD/MM/YYYY');
-      }
-      if (this.state.courseCopy.length === '') {
-        courseCopy['length'] = moment('00:00', 'HH:mm').format('HH:mm');
       }
       this.setState( {courseCopy});
     } 
@@ -143,7 +138,6 @@ class App extends Component {
         courseLink: '',
         codeLink: '',
         creator: '',
-        length: '',
         completed: '',
         courseLocation: null
       },
@@ -153,37 +147,38 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Suspense fallback={<div>Loading...</div>}>
-        <Navigation />
-        <CoursesTable
-          data={this.state.courses}
-          getCourseById={this.getCourseById}
-        />
-        <CourseDialog
-          handleDialogClose={this.handleDialogClose}
-          handleDialogOpen={this.handleDialogOpen}
-          dialogOpen={this.state.dialogOpen}
-          course={this.state.courseCopy}
-          handleChange={this.handleChange}
-          handleSave={this.handleSave}
-          edit={this.state.edit}
-          handleDelete={this.handleDelete}
-          error={this.state.error}
-        />
-        <Fab
-          className='addCourseButton'
-          onClick={this.handleDialogOpen}
-          color="secondary"
-        >
-          <AddIcon />
-        </Fab>
-        </Suspense>
-      </div>
+      <AmplifyAuthenticator>
+        <div className="App">
+          <Suspense fallback={<div>Loading...</div>}>
+          <Navigation />
+          <AmplifySignOut />
+          <CoursesTable
+            data={this.state.courses}
+            getCourseById={this.getCourseById}
+          />
+          <CourseDialog
+            handleDialogClose={this.handleDialogClose}
+            handleDialogOpen={this.handleDialogOpen}
+            dialogOpen={this.state.dialogOpen}
+            course={this.state.courseCopy}
+            handleChange={this.handleChange}
+            handleSave={this.handleSave}
+            edit={this.state.edit}
+            handleDelete={this.handleDelete}
+            error={this.state.error}
+          />
+          <Fab
+            className='addCourseButton'
+            onClick={this.handleDialogOpen}
+            color="secondary"
+          >
+            <AddIcon />
+          </Fab>
+          </Suspense>
+        </div>
+      </AmplifyAuthenticator>
     );
   }
 }
 
-export default withAuthenticator(App, {
-  includeGreetings: true
-});
+export default App;

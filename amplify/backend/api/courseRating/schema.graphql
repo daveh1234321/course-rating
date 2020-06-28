@@ -9,10 +9,9 @@ type Course @model @auth(rules: [{ allow: owner }]){
   courseLink: String!
   codeLink: String!
   creator: String!
-  length: String!
   completed: String!
   courseLocation: CourseLocation!
-  owner: String!
+  owner: String
 }
 
 enum CourseLocation {

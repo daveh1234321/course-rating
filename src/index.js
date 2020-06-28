@@ -13,11 +13,11 @@ import theme from './utils/material-theme'
 Amplify.configure(awsconfig);
 
 ReactDOM.render(
-  <MuiPickersUtilsProvider utils={MomentUtils}>
-    <ThemeProvider theme={theme}>
-      <App/>
-    </ThemeProvider>
-  </MuiPickersUtilsProvider>,
+    <MuiPickersUtilsProvider utils={MomentUtils}>
+      <ThemeProvider theme={theme}>
+        <App/>
+      </ThemeProvider>
+    </MuiPickersUtilsProvider>,
   document.getElementById('root')
 );
 
