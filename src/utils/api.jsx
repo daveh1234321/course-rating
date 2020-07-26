@@ -1,7 +1,7 @@
 import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
-import * as subscriptions from '../graphql/subscriptions'
+// import * as subscriptions from '../graphql/subscriptions'
 
 export const courseCreate = async (course) => {
   console.log(course)

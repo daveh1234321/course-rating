@@ -1,3 +1,6 @@
+$light-grey: rgba(151, 151, 151, 1);
+$primary-purple: rgba(179, 137, 245, 1);
+
 .App {
   text-align: center;
 }
@@ -14,13 +17,13 @@
 .tableCell {
   border: none !important;
   font-size: medium !important;
-  color: #ffffff !important;
+  color: $light-grey !important;
 }
 
 .tableCellHeader {
   border: none !important;
   font-size: large !important;
-  color: #ffffff !important;
+  color: $light-grey !important;
 }
 
 .dialogTitle {
@@ -58,12 +61,32 @@ nav {
 .navTitle {
   font-size: x-large !important;
   font-weight: 600 !important;
+  color: $light-grey;
 }
 
 .navDivider {
   width: 95%;
+  color: $light-grey;
 }
 
 .radioGroup {
   display: inline-block;
+}
+
+:root { // amplify override
+  --amplify-primary-color: rgba(179, 137, 245, 1);
+  --amplify-background-color: rgba(30, 30, 30, 1);
+  --amplify-secondary-color: rgba(226, 226, 226, 1);
+  --amplify-secondary-contrast: rgba(30, 30, 30, 1);
+  --amplify-primary-shade: rgba(156, 114, 222, 1); //9% darker than primary
+  --amplify-primary-tint: rgba(202, 160, 255, 1); // 9% lighter than primary
+}
+
+#root > amplify-authenticator {
+  display: flex;
+  justify-content: center;
+}
+
+.MuiPaper-root {
+  background-color: rgba(30, 30, 30, 1) !important;
 }

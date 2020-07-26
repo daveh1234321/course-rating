@@ -8,7 +8,7 @@ const DialogHeader = (props) => {
   const { edit, handleDialogClose } = props;
   return(
       <div className='dialogHeader'>
-        <Typography>{edit ? 'Update Course' : 'Add Course'}</Typography>
+        <Typography color='secondary'>{edit ? 'Update Course' : 'Add Course'}</Typography>
         <IconButton className='dialogCloseButon' onClick={handleDialogClose}>
           <CloseIcon />
         </IconButton>

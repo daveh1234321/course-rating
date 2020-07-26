@@ -1,7 +1,7 @@
 import React, { Component, Suspense, lazy } from 'react';
 import './App.scss';
 import Navigation from './components/Navigation'
-import { AmplifyAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
 import * as api from './utils/api';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
@@ -147,11 +147,10 @@ class App extends Component {
 
   render() {
     return (
-      <AmplifyAuthenticator>
+      <AmplifyAuthenticator className='amplifySignIn'>
         <div className="App">
           <Suspense fallback={<div>Loading...</div>}>
           <Navigation />
-          <AmplifySignOut />
           <CoursesTable
             data={this.state.courses}
             getCourseById={this.getCourseById}
