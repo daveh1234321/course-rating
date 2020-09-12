@@ -12,7 +12,7 @@
     "@testing-library/react": "^10.4.7",
     "@testing-library/user-event": "^12.0.15",
     "aws-amplify": "^3.0.21",
-    "aws-amplify-react": "^4.1.20",
+    "aws-amplify-react": "^4.2.3",
     "moment": "^2.27.0",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
